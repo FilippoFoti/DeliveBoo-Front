@@ -1,23 +1,23 @@
 <script>
-  import axios from 'axios' ;
+import axios from 'axios';
 
-  export default {
-    data() {
-      return {
-        restaurants: []
-      }
-    },
-    mounted() {
-      this.getRestaurants();
-    },
-    methods: {
-      getRestaurants() {
-        axios.get('http://127.0.0.1:8000/api/restaurants').then(resp => {
-          this.restaurants = resp.data.results;
-        })
-      }
+export default {
+  data() {
+    return {
+      restaurants: []
+    }
+  },
+  mounted() {
+    this.getRestaurants();
+  },
+  methods: {
+    getRestaurants() {
+      axios.get('http://localhost:8000/api/restaurants').then(resp => {
+        this.restaurants = resp.data.restaurants;
+      })
     }
   }
+}
 
 </script>
 
@@ -32,10 +32,8 @@
       </div>
     </div>
   </div>
-  
-
 </template>
 
 <style lang="scss">
-  @use "./styles/general.scss";
+@use "./styles/general.scss";
 </style>
