@@ -1,5 +1,5 @@
 <script>
-import axios from 'axios';
+import NavHeader from './components/NavHeader.vue';
 
 export default {
   data() {
