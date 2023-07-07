@@ -1,12 +1,12 @@
 <script>
 export default {
-    name: "homePage"
+    name: "contact"
 }
 </script>
 
 <template>
     <div class="container text-center">
-        <h2>Home page</h2>
+        <h2>Contact us</h2>
     </div>
 </template>
 
