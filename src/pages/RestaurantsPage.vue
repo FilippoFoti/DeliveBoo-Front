@@ -47,12 +47,14 @@ export default {
 <template>
   <div class="container">
     <label>Tipi di ristoranti</label>
-    <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
-      <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
-        @change="getRestaurants" class="form-check-input" />
-      <label :for="'type_' + typeItem.id" class="form-check-label">
-        {{ typeItem.name }}
-      </label>
+    <div class="d-flex gap-3">
+      <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
+        <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
+          @change="getRestaurants" class="form-check-input" />
+        <label :for="'type_' + typeItem.id" class="form-check-label">
+          {{ typeItem.name }}
+        </label>
+      </div>
     </div>
 
     <h1>Lista ristoranti</h1>
