@@ -26,11 +26,11 @@ export default {
     getRestaurants() {
       const params = {};
 
-
-      if (this.selectedType !== "all") {
-        params.type_id = [this.selectedType];
+      if (this.selectedType.length > 0 && this.selectedType.includes("all")) {
+        params.type_id = [];
+      } else {
+        params.type_id = this.selectedType;
       }
-      console.log(params);
 
       axios.get('http://localhost:8000/api/restaurants', { params })
         .then(resp => {
@@ -41,25 +41,19 @@ export default {
         });
     },
   },
-  computed: {
-    // filteredRestaurants() {
-    //   if (this.selectedType === "all") {
-    //     return this.restaurants;
-    //   } else {
-    //     return this.restaurants.filter(restaurant => restaurant.type_id === this.selectedType);
-    //   }
-    // },
-  },
 };
 </script>
 
 <template>
   <div class="container">
-    <label for="type">Tipi di ristoranti</label>
-    <select v-model="selectedType" id="type" name="type_id[]" class="form-select" @change="getRestaurants">
-      <option value="all">Tutti</option>
-      <option :value="typeItem.id" v-for="typeItem in types" :key="typeItem.id">{{ typeItem.name }}</option>
-    </select>
+    <label>Tipi di ristoranti</label>
+    <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
+      <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
+        @change="getRestaurants" class="form-check-input" />
+      <label :for="'type_' + typeItem.id" class="form-check-label">
+        {{ typeItem.name }}
+      </label>
+    </div>
 
     <h1>Lista ristoranti</h1>
     <div class="row row-cols-4">
