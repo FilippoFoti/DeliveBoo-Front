@@ -60,21 +60,13 @@ export default {
     hideMenu() {
       this.selectedRestaurant = null;
     },
-    addToCart(dish) {
-      this.cart.push(dish);
+    addToCart(dishe) {
+      this.cart.push(dishe);
     },
     removeFromCart(item) {
       const index = this.cart.indexOf(item);
       if (index !== -1) {
         this.cart.splice(index, 1);
-      }
-    },
-    incrementQuantity(dish) {
-      dish.quantity++;
-    },
-    decrementQuantity(dish) {
-      if (dish.quantity > 0) {
-        dish.quantity--;
       }
     },
   },
@@ -109,21 +101,16 @@ export default {
         <div class="popup-content p-5">
           <h2>{{ selectedRestaurant.name }} - Menu</h2>
           <ul class="px-0">
-            <li v-for="dish in selectedRestaurant.dishes" :key="dish.id" class="list-unstyled">
-              <div class="dish-item">
-                <div class="dish-image">
-                  <img class="mw-100" :src="dish.image" alt="Dish Image">
+            <li v-for="dishe in selectedRestaurant.dishes" :key="dishe.id" class="list-unstyled">
+              <div class="dishe-item">
+                <div class="dishe-image">
+                  <img class="mw-100" :src="dishe.image" alt="Dishe Image">
                 </div>
-                <div class="dish-details">
-                  <h4>{{ dish.name }}</h4>
-                  <p>{{ dish.description }}</p>
-                  <p>{{ dish.price }}</p>
-                  <div class="quantity-control">
-                    <button @click="decrementQuantity(dish)" class="btn btn-primary">-</button>
-                    <span>{{ dish.quantity }}</span>
-                    <button @click="incrementQuantity(dish)" class="btn btn-primary">+</button>
-                  </div>
-                  <button @click="addToCart(dish)" class="btn btn-primary">Aggiungi al carrello</button>
+                <div class="dishe-details">
+                  <h4>{{ dishe.name }}</h4>
+                  <p>{{ dishe.description }}</p>
+                  <p>{{ dishe.price }}</p>
+                  <button @click="addToCart(dishe)" class="btn btn-primary">Aggiungi al carrello</button>
                 </div>
               </div>
             </li>
@@ -132,6 +119,7 @@ export default {
         </div>
       </div>
     </div>
+
 
 
 
