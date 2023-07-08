@@ -84,9 +84,9 @@ export default {
           <ul class="px-0">
             <li v-for="dish in selectedRestaurant.dishes" :key="dish.id" class="list-unstyled">
               <div class="dish-item">
-                <!-- <div class="dish-image">
-                  <img class="w-20" :src="dish.image" alt="Dish Image">
-                </div> -->
+                <div class="dish-image">
+                  <img class="mw-100" :src="dish.image" alt="Dish Image">
+                </div>
                 <div class="dish-details">
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
@@ -113,22 +113,16 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-
-  // width: 500px;
-  // height: 100px;
-  /* Aggiungi una larghezza massima opzionale per limitare la larghezza del popup */
   height: auto;
   max-height: 80%;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
-  /* Aggiungi un indice di profondità per posizionare il popup sopra gli altri elementi */
 }
 
 .popup-content {
   position: relative;
-  /* Aggiungi questa proprietà per consentire il posizionamento relativo al contenitore */
   border-radius: 5px;
   width: 500px;
   height: 400px;
@@ -137,10 +131,7 @@ export default {
 
 .close-button {
   position: absolute;
-  /* Posizionamento assoluto all'interno del contenitore */
   top: 10px;
-  /* Distanza dal bordo superiore */
   right: 10px;
-  /* Distanza dal bordo destro */
 }
 </style>
