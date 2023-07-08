@@ -12,6 +12,14 @@ export default {
       selectedRestaurant: null,
     }
   },
+  computed: {
+    cartTotal() {
+      const totalPrice = this.cart.reduce((total, item) => total + parseFloat(item.price), 0);
+      return totalPrice.toFixed(2);
+    },
+  },
+
+
   mounted() {
     this.getRestaurants();
     this.getTypes();
@@ -112,17 +120,19 @@ export default {
       </div>
     </div>
     <div>
-      <h2>Cart</h2>
-      <ul>
-        <li v-for="item in cart" :key="item.id">
+      <h2>Carrello</h2>
+      <ul class="p-0 d-flex gap-5">
+        <li v-for="item in cart" :key="item.id" class="list-unstyled mb-2">
           <div>
             <h4>{{ item.name }}</h4>
-            <p>{{ item.price }}</p>
+            <p>€ {{ item.price }}</p>
             <button @click="removeFromCart(item)" class="btn btn-primary">Remove</button>
           </div>
         </li>
       </ul>
+      <h3>Total: € {{ cartTotal }}</h3>
     </div>
+
   </div>
 </template>
 
@@ -155,7 +165,7 @@ export default {
 
 .close-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 20px;
+  right: 20px;
 }
 </style>
