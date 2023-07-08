@@ -119,7 +119,7 @@ export default {
         </div>
       </div>
     </div>
-    <div>
+    <div v-if="cart.length > 0">
       <h2>Carrello</h2>
       <ul class="p-0 d-flex gap-5">
         <li v-for="item in cart" :key="item.id" class="list-unstyled mb-2">
@@ -130,7 +130,7 @@ export default {
           </div>
         </li>
       </ul>
-      <h3>Total: € {{ cartTotal }}</h3>
+      <h3 v-if="cart.length > 0">Total: € {{ cartTotal }}</h3>
     </div>
 
   </div>
