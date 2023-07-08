@@ -7,6 +7,8 @@ export default {
       restaurants: [],
       types: [],
       selectedType: [],
+      cart: [],
+
       selectedRestaurant: null,
     }
   },
@@ -50,6 +52,15 @@ export default {
     hideMenu() {
       this.selectedRestaurant = null;
     },
+    addToCart(dish) {
+      this.cart.push(dish);
+    },
+    removeFromCart(item) {
+      const index = this.cart.indexOf(item);
+      if (index !== -1) {
+        this.cart.splice(index, 1);
+      }
+    },
   },
 };
 </script>
@@ -91,6 +102,7 @@ export default {
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
                   <p>{{ dish.price }}</p>
+                  <button @click="addToCart(dish)" class="btn btn-primary">Add to Cart</button>
                 </div>
               </div>
             </li>
@@ -98,6 +110,18 @@ export default {
           <button @click="hideMenu" class="btn btn-primary close-button">X</button>
         </div>
       </div>
+    </div>
+    <div>
+      <h2>Cart</h2>
+      <ul>
+        <li v-for="item in cart" :key="item.id">
+          <div>
+            <h4>{{ item.name }}</h4>
+            <p>{{ item.price }}</p>
+            <button @click="removeFromCart(item)" class="btn btn-primary">Remove</button>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
