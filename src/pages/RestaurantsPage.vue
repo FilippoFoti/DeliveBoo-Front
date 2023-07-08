@@ -69,6 +69,14 @@ export default {
         this.cart.splice(index, 1);
       }
     },
+    incrementQuantity(dish) {
+      dish.quantity++;
+    },
+    decrementQuantity(dish) {
+      if (dish.quantity > 0) {
+        dish.quantity--;
+      }
+    },
   },
 };
 </script>
@@ -88,7 +96,7 @@ export default {
 
     <h1>Lista ristoranti</h1>
     <div class="row row-cols-4">
-      <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
+      <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
           <button @click="showMenu(restaurant.id)" class="btn btn-primary">Mostra menu</button>
@@ -110,7 +118,12 @@ export default {
                   <h4>{{ dish.name }}</h4>
                   <p>{{ dish.description }}</p>
                   <p>{{ dish.price }}</p>
-                  <button @click="addToCart(dish)" class="btn btn-primary">Add to Cart</button>
+                  <div class="quantity-control">
+                    <button @click="decrementQuantity(dish)" class="btn btn-primary">-</button>
+                    <span>{{ dish.quantity }}</span>
+                    <button @click="incrementQuantity(dish)" class="btn btn-primary">+</button>
+                  </div>
+                  <button @click="addToCart(dish)" class="btn btn-primary">Aggiungi al carrello</button>
                 </div>
               </div>
             </li>
@@ -119,6 +132,9 @@ export default {
         </div>
       </div>
     </div>
+
+
+
     <div v-if="cart.length > 0">
       <h2>Carrello</h2>
       <ul class="p-0 d-flex gap-5">
@@ -126,11 +142,11 @@ export default {
           <div>
             <h4>{{ item.name }}</h4>
             <p>€ {{ item.price }}</p>
-            <button @click="removeFromCart(item)" class="btn btn-primary">Remove</button>
+            <button @click="removeFromCart(item)" class="btn btn-primary">Rimuovi</button>
           </div>
         </li>
       </ul>
-      <h3 v-if="cart.length > 0">Total: € {{ cartTotal }}</h3>
+      <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
     </div>
 
   </div>
