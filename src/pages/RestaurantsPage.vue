@@ -15,10 +15,11 @@ export default {
   },
   computed: {
     cartTotal() {
-      const totalPrice = this.cart.reduce((total, item) => total + parseFloat(item.price), 0);
-      return totalPrice.toFixed(2);
+      const totalAmount = this.cart.reduce((total, item) => total + parseFloat(item.price * item.count), 0);
+      return totalAmount.toFixed(2);
     },
   },
+
   mounted() {
     this.getRestaurants();
     this.getTypes();
@@ -68,12 +69,38 @@ export default {
       this.selectedRestaurantDetails = null;
     },
     addToCart(dishe) {
-      this.cart.push(dishe);
+      const existingItem = this.cart.find(item => item.id === dishe.id);
+      if (existingItem) {
+        existingItem.count++;
+      } else {
+        const newItem = { ...dishe, count: 1 };
+        this.cart.push(newItem);
+      }
+      this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
+        if (d.id === dishe.id) {
+          return { ...d, count: existingItem ? existingItem.count : 1 };
+        }
+        return d;
+      });
     },
     removeFromCart(dishe) {
-      const index = this.cart.indexOf(dishe);
+      const index = this.cart.findIndex(cartItem => cartItem.id === dishe.id);
       if (index !== -1) {
-        this.cart.splice(index, 1);
+        const currentItem = this.cart[index];
+
+        if (currentItem.count > 1) {
+          currentItem.count--;
+        } else {
+          this.cart.splice(index, 1);
+        }
+
+        // Aggiorna il menu selezionato con l'oggetto aggiornato
+        this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
+          if (d.id === dishe.id) {
+            return { ...d, count: currentItem.count };
+          }
+          return d;
+        });
       }
     },
   },
@@ -118,8 +145,11 @@ export default {
                   <h4>{{ dishe.name }}</h4>
                   <p>{{ dishe.description }}</p>
                   <p>{{ dishe.price }}</p>
-                  <button @click="addToCart(dishe)" class="btn btn-primary">+</button>
-                  <button @click="removeFromCart(dishe)" class="btn btn-primary">-</button>
+                  <div>
+                    <button @click="removeFromCart(dishe)" class="btn btn-primary">-</button>
+                    <span class="mx-2">{{ dishe.count }}</span>
+                    <button @click="addToCart(dishe)" class="btn btn-primary">+</button>
+                  </div>
                 </div>
               </div>
             </li>
@@ -128,6 +158,7 @@ export default {
         </div>
       </div>
     </div>
+
 
     <div v-if="showRestaurantDetails && selectedRestaurantDetails">
       <div class="popup">
@@ -150,12 +181,17 @@ export default {
           <div>
             <h4>{{ item.name }}</h4>
             <p>€ {{ item.price }}</p>
-            <button @click="removeFromCart(item)" class="btn btn-primary">Rimuovi</button>
+            <div>
+              <button @click="removeFromCart(item)" class="btn btn-primary">-</button>
+              <span class="mx-2">{{ item.count }}</span>
+              <button @click="addToCart(item)" class="btn btn-primary">+</button>
+            </div>
           </div>
         </li>
       </ul>
       <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
     </div>
+
 
   </div>
 </template>
