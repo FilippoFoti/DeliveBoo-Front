@@ -76,13 +76,16 @@ export default {
         const newItem = { ...dishe, count: 1 };
         this.cart.push(newItem);
       }
-      this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
-        if (d.id === dishe.id) {
-          return { ...d, count: existingItem ? existingItem.count : 1 };
-        }
-        return d;
-      });
+      if (this.selectedRestaurant && this.selectedRestaurant.id === dishe.restaurantId) {
+        this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
+          if (d.id === dishe.id) {
+            return { ...d, count: existingItem ? existingItem.count : 1 };
+          }
+          return d;
+        });
+      }
     },
+
     removeFromCart(dishe) {
       const index = this.cart.findIndex(cartItem => cartItem.id === dishe.id);
       if (index !== -1) {
@@ -93,12 +96,15 @@ export default {
         } else {
           this.cart.splice(index, 1);
         }
-        this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
-          if (d.id === dishe.id) {
-            return { ...d, count: currentItem.count };
-          }
-          return d;
-        });
+
+        if (this.selectedRestaurant && this.selectedRestaurant.id === dishe.restaurantId) {
+          this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
+            if (d.id === dishe.id) {
+              return { ...d, count: currentItem.count };
+            }
+            return d;
+          });
+        }
       }
     },
     clearCart() {
@@ -126,7 +132,7 @@ export default {
       <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
-          <button @click="showMenu(restaurant.id)" class="btn btn-primary">Mostra menu</button>
+          <button @click="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button>
           <button @click="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
         </div>
       </div>
@@ -146,11 +152,11 @@ export default {
                   <h4>{{ dishe.name }}</h4>
                   <p>{{ dishe.description }}</p>
                   <p>{{ dishe.price }}</p>
-                  <div>
+                  <div v-if="dishe.count > 0">
                     <button @click="removeFromCart(dishe)" class="btn btn-primary">-</button>
                     <span class="mx-2">{{ dishe.count }}</span>
-                    <button @click="addToCart(dishe)" class="btn btn-primary">+</button>
                   </div>
+                  <button @click="addToCart(dishe)" class="btn btn-primary">Aggiungi al carrello</button>
                 </div>
               </div>
             </li>
@@ -159,6 +165,7 @@ export default {
         </div>
       </div>
     </div>
+
 
 
     <div v-if="showRestaurantDetails && selectedRestaurantDetails">
