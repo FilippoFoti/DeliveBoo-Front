@@ -70,8 +70,8 @@ export default {
     addToCart(dishe) {
       this.cart.push(dishe);
     },
-    removeFromCart(item) {
-      const index = this.cart.indexOf(item);
+    removeFromCart(dishe) {
+      const index = this.cart.indexOf(dishe);
       if (index !== -1) {
         this.cart.splice(index, 1);
       }
@@ -118,7 +118,8 @@ export default {
                   <h4>{{ dishe.name }}</h4>
                   <p>{{ dishe.description }}</p>
                   <p>{{ dishe.price }}</p>
-                  <button @click="addToCart(dishe)" class="btn btn-primary mb-2">Aggiungi al carrello</button>
+                  <button @click="addToCart(dishe)" class="btn btn-primary">+</button>
+                  <button @click="removeFromCart(dishe)" class="btn btn-primary">-</button>
                 </div>
               </div>
             </li>
@@ -136,8 +137,6 @@ export default {
           <p>Indirizzo: {{ selectedRestaurantDetails.address }}</p>
           <p>Telefono: {{ selectedRestaurantDetails.phone }}</p>
           <p>P. Iva: {{ selectedRestaurantDetails.vat_number }}</p>
-
-          <!-- Aggiungi altri dettagli del ristorante qui -->
           <button @click="hideMenu" class="btn btn-primary close-button">X</button>
         </div>
       </div>
