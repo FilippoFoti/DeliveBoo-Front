@@ -93,8 +93,6 @@ export default {
         } else {
           this.cart.splice(index, 1);
         }
-
-        // Aggiorna il menu selezionato con l'oggetto aggiornato
         this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
           if (d.id === dishe.id) {
             return { ...d, count: currentItem.count };
@@ -102,6 +100,9 @@ export default {
           return d;
         });
       }
+    },
+    clearCart() {
+      this.cart = [];
     },
   },
 };
@@ -189,6 +190,9 @@ export default {
           </div>
         </li>
       </ul>
+      <div>
+        <button @click="clearCart" class="btn btn-primary mb-2">Svuota</button>
+      </div>
       <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
     </div>
 
