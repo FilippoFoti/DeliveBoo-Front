@@ -8,8 +8,9 @@ export default {
       types: [],
       selectedType: [],
       cart: [],
-
       selectedRestaurant: null,
+      showRestaurantDetails: false,
+      selectedRestaurantDetails: null,
     }
   },
   computed: {
@@ -18,8 +19,6 @@ export default {
       return totalPrice.toFixed(2);
     },
   },
-
-
   mounted() {
     this.getRestaurants();
     this.getTypes();
@@ -55,10 +54,18 @@ export default {
       const restaurant = this.restaurants.find(r => r.id === restaurantId);
       if (restaurant) {
         this.selectedRestaurant = restaurant;
+        this.showRestaurantDetails = false;
+        this.selectedRestaurantDetails = null;
       }
+    },
+    showDetails(restaurant) {
+      this.selectedRestaurantDetails = restaurant;
+      this.showRestaurantDetails = true;
     },
     hideMenu() {
       this.selectedRestaurant = null;
+      this.showRestaurantDetails = false;
+      this.selectedRestaurantDetails = null;
     },
     addToCart(dishe) {
       this.cart.push(dishe);
@@ -74,7 +81,7 @@ export default {
 </script>
 
 <template>
-  <div class="container" :class="{ 'popup-open': selectedRestaurant }">
+  <div class="container" :class="{ 'popup-open': selectedRestaurant || showRestaurantDetails }">
     <label>Tipi di ristoranti</label>
     <div class="d-flex gap-3">
       <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
@@ -92,6 +99,7 @@ export default {
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
           <button @click="showMenu(restaurant.id)" class="btn btn-primary">Mostra menu</button>
+          <button @click="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
         </div>
       </div>
     </div>
@@ -110,7 +118,7 @@ export default {
                   <h4>{{ dishe.name }}</h4>
                   <p>{{ dishe.description }}</p>
                   <p>{{ dishe.price }}</p>
-                  <button @click="addToCart(dishe)" class="btn btn-primary">Aggiungi al carrello</button>
+                  <button @click="addToCart(dishe)" class="btn btn-primary mb-2">Aggiungi al carrello</button>
                 </div>
               </div>
             </li>
@@ -120,7 +128,20 @@ export default {
       </div>
     </div>
 
+    <div v-if="showRestaurantDetails && selectedRestaurantDetails">
+      <div class="popup">
+        <div class="popup-content p-5">
+          <h2>{{ selectedRestaurantDetails.name }} - Dettagli</h2>
+          <img class="mw-100" :src="selectedRestaurantDetails.image" alt="Restaurant Image">
+          <p>Indirizzo: {{ selectedRestaurantDetails.address }}</p>
+          <p>Telefono: {{ selectedRestaurantDetails.phone }}</p>
+          <p>P. Iva: {{ selectedRestaurantDetails.vat_number }}</p>
 
+          <!-- Aggiungi altri dettagli del ristorante qui -->
+          <button @click="hideMenu" class="btn btn-primary close-button">X</button>
+        </div>
+      </div>
+    </div>
 
 
     <div v-if="cart.length > 0">
