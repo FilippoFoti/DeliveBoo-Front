@@ -23,7 +23,9 @@ export default {
   mounted() {
     this.getRestaurants();
     this.getTypes();
+    this.loadCartFromLocalStorage();
   },
+
   methods: {
     getTypes() {
       axios.get('http://localhost:8000/api/types')
@@ -84,8 +86,8 @@ export default {
           return d;
         });
       }
+      this.saveCartToLocalStorage()
     },
-
     removeFromCart(dishe) {
       const index = this.cart.findIndex(cartItem => cartItem.id === dishe.id);
       if (index !== -1) {
@@ -106,9 +108,20 @@ export default {
           });
         }
       }
+      this.saveCartToLocalStorage()
     },
     clearCart() {
       this.cart = [];
+      this.saveCartToLocalStorage();
+    },
+    loadCartFromLocalStorage() {
+      const cartData = localStorage.getItem('cart');
+      if (cartData) {
+        this.cart = JSON.parse(cartData);
+      }
+    },
+    saveCartToLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(this.cart));
     },
   },
 };
