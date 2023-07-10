@@ -1,9 +1,11 @@
 <script>
 import axios from 'axios';
+import { state } from '../state';
 
 export default {
   data() {
     return {
+      state,
       restaurants: [],
       types: [],
       selectedType: [],
@@ -159,7 +161,7 @@ export default {
             <li v-for="dishe in selectedRestaurant.dishes" :key="dishe.id" class="list-unstyled">
               <div class="dishe-item">
                 <div class="dishe-image">
-                  <img class="mw-100" :src="dishe.image" alt="Dishe Image">
+                  <img class="mw-100" :src="state.imagePath(dishe.image)" alt="Dishe Image">
                 </div>
                 <div class="dishe-details">
                   <h4>{{ dishe.name }}</h4>
@@ -185,7 +187,7 @@ export default {
       <div class="popup">
         <div class="popup-content p-5">
           <h2>{{ selectedRestaurantDetails.name }} - Dettagli</h2>
-          <img class="mw-100" :src="selectedRestaurantDetails.image" alt="Restaurant Image">
+          <img class="mw-100" :src="state.imagePath(selectedRestaurantDetails.image)" alt="Restaurant Image">
           <p>Indirizzo: {{ selectedRestaurantDetails.address }}</p>
           <p>Telefono: {{ selectedRestaurantDetails.phone }}</p>
           <p>P. Iva: {{ selectedRestaurantDetails.vat_number }}</p>
