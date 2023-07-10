@@ -130,7 +130,7 @@ export default {
 </script>
 
 <template>
-  <div class="container" :class="{ 'popup-open': selectedRestaurant || showRestaurantDetails }">
+  <div @click="hideMenu" class="container" :class="{ 'popup-open': selectedRestaurant || showRestaurantDetails }">
     <label>Tipi di ristoranti</label>
     <div class="d-flex gap-3">
       <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
@@ -147,8 +147,8 @@ export default {
       <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
-          <button @click="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button>
-          <button @click="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
+          <button @click.stop="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button>
+          <button @click.stop="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
         </div>
       </div>
     </div>
