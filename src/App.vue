@@ -1,8 +1,9 @@
 <script>
 import NavHeader from './components/NavHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 
 export default {
-  components: { NavHeader }
+  components: { NavHeader, AppFooter }
 };
 </script>
 
@@ -10,6 +11,8 @@ export default {
   <NavHeader />
 
   <router-view />
+
+  <AppFooter />
 </template>
 
 <style lang="scss">

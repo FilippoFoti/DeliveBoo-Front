@@ -221,8 +221,12 @@ export default {
 </template>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+.container {
+  padding-top: 80px;
+}
 
 .popup {
   position: fixed;
