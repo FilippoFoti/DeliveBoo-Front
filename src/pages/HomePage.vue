@@ -61,7 +61,8 @@ export default {
             <div class="row row-cols-2">
                 <div class="col">
                     <h2 class="text-center text-white fw-bold fs-1">Ordina il tuo cibo preferito con l'app DeliveBoo</h2>
-                    <p class="text-center text-white fs-5">Paga in app, accumula punti, monitora i tuoi ordini in tempo reale e molto altro.</p>
+                    <p class="text-center text-white fs-5">Paga in app, accumula punti, monitora i tuoi ordini in tempo
+                        reale e molto altro.</p>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center">
                     <div class="download d-flex">
@@ -85,6 +86,8 @@ export default {
         </div>
     </div>
     <img class="wave-rotate" src="../assets/img/wave-2.svg" alt="">
+
+    
 </template>
 
 <style lang="scss" scoped>
@@ -156,46 +159,49 @@ export default {
 .wave-2 {
     width: 100%;
 }
+
 .section-2 {
     height: 200px;
     background-color: #DC2F02;
 
     .download {
-                .button {
-                    padding: 15px;
-                    border-radius: 10px;
-                    border: 1px solid white;
-                    margin: 10px;
-                    background-color: #03071E;
+        .button {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid white;
+            margin: 10px;
+            background-color: #03071E;
 
-                    i {
-                        color: white;
-                        padding-right: 15px;
-                    }
-
-                    p {
-                        font-size: 1rem;
-                        color: grey;
-                    }
-
-                    h4{
-                        font-size: 1.2rem;
-                        color: white;
-                    }
-
-                    &:hover {
-                        background-color:#242947;
-                        cursor: pointer;
-                        transform: scale(1.1);
-                        transition: 1s;
-                    }
-                }
-
+            i {
+                color: white;
+                padding-right: 15px;
             }
+
+            p {
+                font-size: 1rem;
+                color: grey;
+            }
+
+            h4 {
+                font-size: 1.2rem;
+                color: white;
+            }
+
+            &:hover {
+                background-color: #242947;
+                cursor: pointer;
+                transform: scale(1.1);
+                transition: 1s;
+            }
+        }
+
+    }
 }
 
 .wave-rotate {
     width: 100%;
     transform: rotate(180deg);
 }
+
+
 </style>
