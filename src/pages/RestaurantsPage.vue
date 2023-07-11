@@ -147,7 +147,10 @@ export default {
       <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
-          <button @click.stop="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button>
+          <router-link to="/restaurant_menu" class="btn btn-primary mb-2">
+            Vai nel menu
+          </router-link>
+          <!-- <button @click.stop="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button> -->
           <button @click.stop="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
         </div>
       </div>

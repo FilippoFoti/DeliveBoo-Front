@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage.vue";
 import RestaurantsPage from "./pages/RestaurantsPage.vue";
 import AboutPage from "./pages/AboutPage.vue";
 import ContactPage from "./pages/ContactPage.vue";
+import RestaurantMenuPage from "./pages/RestaurantMenuPage.vue";
 // import SingleProjectPage from "./pages/SingleProjectPage.vue";
 
 
@@ -28,6 +29,11 @@ const router = createRouter({
             path: "/contact",
             name: "contact",
             component: ContactPage,
+        },
+        {
+            path: "/restaurant_menu",
+            name: "restaurant_menu",
+            component: RestaurantMenuPage,
         },
         // {
         //     path: "/projects/:slug",
