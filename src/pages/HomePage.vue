@@ -26,6 +26,16 @@ export default {
                 }
             ]
         }
+    },
+    methods: {
+        showDiv(item) {
+            this.image.forEach((image) => {
+                if (image !== item) {
+                    image.showDiv = false;
+                }
+            });
+            item.showDiv = !item.showDiv;
+        }
     }
 }
 </script>
@@ -43,14 +53,17 @@ export default {
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
         <div class="row row-cols-3 d-flex align-items-center justify-content-center">
-            <div class="col p-0" v-for="item in image">
-                <div class="card p-0 mx-2 my-3 shadow">
+            <div class="col p-0" v-for="item in image" :key="item.name">
+                <div class="card p-0 mx-2 my-3 shadow" @click="showDiv(item)">
                     <figure class="m-0">
                         <img :src="item.img" class="rounded" alt="">
                     </figure>
                     <div class="card-body">
                         <h5 class="card-title text-center m-2">{{ item.name }}</h5>
                     </div>
+                </div>
+                <div class="div-below" v-if="item.showDiv">
+                    <h5 class="text-center">Ciao</h5>
                 </div>
             </div>
         </div>
@@ -86,8 +99,6 @@ export default {
         </div>
     </div>
     <img class="wave-rotate" src="../assets/img/wave-2.svg" alt="">
-
-    
 </template>
 
 <style lang="scss" scoped>
@@ -203,5 +214,9 @@ export default {
     transform: rotate(180deg);
 }
 
-
+.div-below {
+    background-color: #e9ecef;
+    padding: 10px;
+    margin-top: 10px;
+}
 </style>

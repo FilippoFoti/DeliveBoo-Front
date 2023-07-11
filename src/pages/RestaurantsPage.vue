@@ -13,11 +13,14 @@ export default {
       selectedRestaurant: null,
       showRestaurantDetails: false,
       selectedRestaurantDetails: null,
-    }
+    };
   },
   computed: {
     cartTotal() {
-      const totalAmount = this.cart.reduce((total, item) => total + parseFloat(item.price * item.count), 0);
+      const totalAmount = this.cart.reduce(
+        (total, item) => total + parseFloat(item.price * item.count),
+        0
+      );
       return totalAmount.toFixed(2);
     },
   },
@@ -30,11 +33,12 @@ export default {
 
   methods: {
     getTypes() {
-      axios.get('http://localhost:8000/api/types')
-        .then(resp => {
+      axios
+        .get("http://localhost:8000/api/types")
+        .then((resp) => {
           this.types = resp.data.results;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     },
@@ -47,16 +51,17 @@ export default {
         params.type_id = this.selectedType;
       }
 
-      axios.get('http://localhost:8000/api/restaurants', { params })
-        .then(resp => {
+      axios
+        .get("http://localhost:8000/api/restaurants", { params })
+        .then((resp) => {
           this.restaurants = resp.data.results;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     },
     showMenu(restaurantId) {
-      const restaurant = this.restaurants.find(r => r.id === restaurantId);
+      const restaurant = this.restaurants.find((r) => r.id === restaurantId);
       if (restaurant) {
         this.selectedRestaurant = restaurant;
         this.showRestaurantDetails = false;
@@ -73,25 +78,30 @@ export default {
       this.selectedRestaurantDetails = null;
     },
     addToCart(dishe) {
-      const existingItem = this.cart.find(item => item.id === dishe.id);
+      const existingItem = this.cart.find((item) => item.id === dishe.id);
       if (existingItem) {
         existingItem.count++;
       } else {
         const newItem = { ...dishe, count: 1 };
         this.cart.push(newItem);
       }
-      if (this.selectedRestaurant && this.selectedRestaurant.id === dishe.restaurantId) {
-        this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
-          if (d.id === dishe.id) {
-            return { ...d, count: existingItem ? existingItem.count : 1 };
+      if (
+        this.selectedRestaurant &&
+        this.selectedRestaurant.id === dishe.restaurantId
+      ) {
+        this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(
+          (d) => {
+            if (d.id === dishe.id) {
+              return { ...d, count: existingItem ? existingItem.count : 1 };
+            }
+            return d;
           }
-          return d;
-        });
+        );
       }
-      this.saveCartToLocalStorage()
+      this.saveCartToLocalStorage();
     },
     removeFromCart(dishe) {
-      const index = this.cart.findIndex(cartItem => cartItem.id === dishe.id);
+      const index = this.cart.findIndex((cartItem) => cartItem.id === dishe.id);
       if (index !== -1) {
         const currentItem = this.cart[index];
 
@@ -101,29 +111,34 @@ export default {
           this.cart.splice(index, 1);
         }
 
-        if (this.selectedRestaurant && this.selectedRestaurant.id === dishe.restaurantId) {
-          this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(d => {
-            if (d.id === dishe.id) {
-              return { ...d, count: currentItem.count };
+        if (
+          this.selectedRestaurant &&
+          this.selectedRestaurant.id === dishe.restaurantId
+        ) {
+          this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(
+            (d) => {
+              if (d.id === dishe.id) {
+                return { ...d, count: currentItem.count };
+              }
+              return d;
             }
-            return d;
-          });
+          );
         }
       }
-      this.saveCartToLocalStorage()
+      this.saveCartToLocalStorage();
     },
     clearCart() {
       this.cart = [];
       this.saveCartToLocalStorage();
     },
     loadCartFromLocalStorage() {
-      const cartData = localStorage.getItem('cart');
+      const cartData = localStorage.getItem("cart");
       if (cartData) {
         this.cart = JSON.parse(cartData);
       }
     },
     saveCartToLocalStorage() {
-      localStorage.setItem('cart', JSON.stringify(this.cart));
+      localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },
 };
@@ -147,9 +162,33 @@ export default {
       <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
-          <router-link to="/restaurant_menu" class="btn btn-primary mb-2">
+          <button @click="showMenu(restaurant.id)" class="btn btn-primary">Mostra menu</button>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="selectedRestaurant">
+      <div class="popup">
+        <div class="popup-content p-5">
+          <h2>{{ selectedRestaurant.name }} - Menu</h2>
+          <ul class="px-0">
+            <li v-for="dish in selectedRestaurant.dishes" :key="dish.id" class="list-unstyled">
+              <div class="dish-item">
+                <!-- <div class="dish-image">
+                  <img class="w-20" :src="dish.image" alt="Dish Image">
+                </div> -->
+                <div class="dish-details">
+                  <h4>{{ dish.name }}</h4>
+                  <p>{{ dish.description }}</p>
+                  <p>{{ dish.price }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <button @click="hideMenu" class="btn btn-primary close-button">X</button>
+          <!-- <router-link to="/restaurant_menu" class="btn btn-primary mb-2">
             Vai nel menu
-          </router-link>
+          </router-link> -->
           <!-- <button @click.stop="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button> -->
           <button @click.stop="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
         </div>
@@ -171,7 +210,9 @@ export default {
                   <p>{{ dishe.description }}</p>
                   <p>{{ dishe.price }}</p>
                   <div v-if="dishe.count > 0">
-                    <button @click="removeFromCart(dishe)" class="btn btn-primary">-</button>
+                    <button @click="removeFromCart(dishe)" class="btn btn-primary">
+                      -
+                    </button>
                     <span class="mx-2">{{ dishe.count }}</span>
                   </div>
                   <button @click="addToCart(dishe)" class="btn btn-primary my-3">Aggiungi al carrello</button>
@@ -179,7 +220,9 @@ export default {
               </div>
             </li>
           </ul>
-          <button @click="hideMenu" class="btn btn-primary close-button">X</button>
+          <button @click="hideMenu" class="btn btn-primary close-button">
+            X
+          </button>
         </div>
       </div>
     </div>
@@ -192,12 +235,14 @@ export default {
           <p>Indirizzo: {{ selectedRestaurantDetails.address }}</p>
           <p>Telefono: {{ selectedRestaurantDetails.phone }}</p>
           <p>P. Iva: {{ selectedRestaurantDetails.vat_number }}</p>
-          <button @click="hideMenu" class="btn btn-primary close-button">X</button>
+          <button @click="hideMenu" class="btn btn-primary close-button">
+            X
+          </button>
         </div>
       </div>
     </div>
 
-    <div v-if="cart.length > 0" class="cart-container overflow-auto">
+    <div v-if="cart.length > 0" class="cart-container overflow-auto" id="cart">
       <h2>Carrello</h2>
       <div class="p-0">
         <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
@@ -206,15 +251,20 @@ export default {
             <h4>{{ item.name }}</h4>
             <p>€ {{ item.price }}</p>
             <div>
-              <button @click="removeFromCart(item)" class="btn btn-primary">-</button>
+              <button @click="removeFromCart(item)" class="btn btn-primary">
+                -
+              </button>
               <span class="mx-2">{{ item.count }}</span>
-              <button @click="addToCart(item)" class="btn btn-primary">+</button>
+              <button @click="addToCart(item)" class="btn btn-primary">
+                +
+              </button>
             </div>
           </div>
         </div>
       </div>
       <div>
         <button @click="clearCart" class="btn btn-primary mb-2">Svuota</button>
+        <router-link to="payment"> Procedi al pagamento </router-link>
       </div>
     </div>
   </div>

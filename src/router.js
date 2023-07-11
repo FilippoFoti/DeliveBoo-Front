@@ -4,6 +4,7 @@ import RestaurantsPage from "./pages/RestaurantsPage.vue";
 import AboutPage from "./pages/AboutPage.vue";
 import ContactPage from "./pages/ContactPage.vue";
 import RestaurantMenuPage from "./pages/RestaurantMenuPage.vue";
+import PaymentPage from "./pages/PaymentPage.vue";
 // import SingleProjectPage from "./pages/SingleProjectPage.vue";
 
 
@@ -35,6 +36,13 @@ const router = createRouter({
             name: "restaurant_menu",
             component: RestaurantMenuPage,
         },
+        {
+            path: "/payment",
+            name: "payment",
+            component: PaymentPage,
+        }
+
+        ,
         // {
         //     path: "/projects/:slug",
         //     name: "single-post",
