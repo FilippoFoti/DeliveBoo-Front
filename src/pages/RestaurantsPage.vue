@@ -162,9 +162,33 @@ export default {
       <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
-          <router-link to="/restaurant_menu" class="btn btn-primary mb-2">
+          <button @click="showMenu(restaurant.id)" class="btn btn-primary">Mostra menu</button>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="selectedRestaurant">
+      <div class="popup">
+        <div class="popup-content p-5">
+          <h2>{{ selectedRestaurant.name }} - Menu</h2>
+          <ul class="px-0">
+            <li v-for="dish in selectedRestaurant.dishes" :key="dish.id" class="list-unstyled">
+              <div class="dish-item">
+                <!-- <div class="dish-image">
+                  <img class="w-20" :src="dish.image" alt="Dish Image">
+                </div> -->
+                <div class="dish-details">
+                  <h4>{{ dish.name }}</h4>
+                  <p>{{ dish.description }}</p>
+                  <p>{{ dish.price }}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <button @click="hideMenu" class="btn btn-primary close-button">X</button>
+          <!-- <router-link to="/restaurant_menu" class="btn btn-primary mb-2">
             Vai nel menu
-          </router-link>
+          </router-link> -->
           <!-- <button @click.stop="showMenu(restaurant.id)" class="btn btn-primary mb-2">Mostra menu</button> -->
           <button @click.stop="showDetails(restaurant)" class="btn btn-primary">Dettagli</button>
         </div>
@@ -218,7 +242,7 @@ export default {
       </div>
     </div>
 
-    <div v-if="cart.length > 0" class="cart-container overflow-auto">
+    <div v-if="cart.length > 0" class="cart-container overflow-auto" id="cart">
       <h2>Carrello</h2>
       <div class="p-0">
         <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
