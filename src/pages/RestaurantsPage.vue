@@ -130,7 +130,7 @@ export default {
 </script>
 
 <template>
-  <div @click="hideMenu" class="container" :class="{ 'popup-open': selectedRestaurant || showRestaurantDetails }">
+  <div class="container" :class="{ 'popup-open': selectedRestaurant || showRestaurantDetails }">
     <label>Tipi di ristoranti</label>
     <div class="d-flex gap-3">
       <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
@@ -143,7 +143,7 @@ export default {
     </div>
 
     <h1>Lista ristoranti</h1>
-    <div class="row row-cols-4">
+    <div class="row row-cols-4" :style="{ marginRight: cart.length > 0 ? '100px' : '0' }">
       <div class="col mb-3" v-for="restaurant in restaurants" :key="restaurant.id">
         <div class="card">
           <h3>{{ restaurant.name }}</h3>
@@ -171,7 +171,7 @@ export default {
                     <button @click="removeFromCart(dishe)" class="btn btn-primary">-</button>
                     <span class="mx-2">{{ dishe.count }}</span>
                   </div>
-                  <button @click="addToCart(dishe)" class="btn btn-primary">Aggiungi al carrello</button>
+                  <button @click="addToCart(dishe)" class="btn btn-primary my-3">Aggiungi al carrello</button>
                 </div>
               </div>
             </li>
@@ -180,8 +180,6 @@ export default {
         </div>
       </div>
     </div>
-
-
 
     <div v-if="showRestaurantDetails && selectedRestaurantDetails">
       <div class="popup">
@@ -196,11 +194,11 @@ export default {
       </div>
     </div>
 
-
-    <div v-if="cart.length > 0">
+    <div v-if="cart.length > 0" class="cart-container overflow-auto">
       <h2>Carrello</h2>
-      <ul class="p-0 d-flex gap-5">
-        <li v-for="item in cart" :key="item.id" class="list-unstyled mb-2">
+      <div class="p-0">
+        <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
+        <div v-for="item in cart" :key="item.id" class="list-unstyled mb-2">
           <div>
             <h4>{{ item.name }}</h4>
             <p>€ {{ item.price }}</p>
@@ -210,15 +208,12 @@ export default {
               <button @click="addToCart(item)" class="btn btn-primary">+</button>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
       <div>
         <button @click="clearCart" class="btn btn-primary mb-2">Svuota</button>
       </div>
-      <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
     </div>
-
-
   </div>
 </template>
 
@@ -227,7 +222,24 @@ export default {
 @use "../styles/general.scss" as *;
 
 .container {
+  position: relative;
   padding-top: 80px;
+}
+
+.cart-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 99;
+
+  h2 {
+    margin-top: 80px;
+  }
 }
 
 .popup {
@@ -248,8 +260,8 @@ export default {
 .popup-content {
   position: relative;
   border-radius: 5px;
-  width: 500px;
-  height: 400px;
+  width: 600px;
+  height: 600px;
   overflow-y: auto;
 }
 
