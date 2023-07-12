@@ -130,7 +130,7 @@ export default {
 #hero {
     width: 100%;
     height: 100vh;
-    background-image: url(/src/assets/img/hero-home.jpg);
+    background-image: url("../assets/img/hero-home.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -181,6 +181,7 @@ export default {
         img {
             height: 100%;
             width: 100%;
+            object-fit: cover;
         }
     }
 

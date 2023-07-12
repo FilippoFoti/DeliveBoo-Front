@@ -6,33 +6,21 @@ export default {
     data() {
         return {
             state,
-            selectedRestaurant: null,
+            restaurants: [],
             dishes: [],
+            selectedRestaurantId: null,
         }
     },
-    props: ['id'], // restaurant id passed from route params
     mounted() {
-        this.getRestaurant();
-        this.getDishes();
+        this.getRestaurants(),
+            this.selectedRestaurantId = parseInt(this.$route.params.id);
     },
     methods: {
-        getRestaurant() {
+        getRestaurants() {
             axios
-                .get(`http://localhost:8000/api/restaurants/${this.id}`)
+                .get("http://localhost:8000/api/restaurants")
                 .then((resp) => {
-                    this.selectedRestaurant = resp.data.result;
-                    console.log(resp)
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-
-        },
-        getDishes() {
-            axios
-                .get(`http://localhost:8000/api/restaurants/${this.id}/dishes`)
-                .then((resp) => {
-                    this.dishes = resp.data.results;
+                    this.restaurants = resp.data.results;
                 })
                 .catch((error) => {
                     console.error(error);
@@ -44,15 +32,12 @@ export default {
 
 <template>
     <div class="container pt-5">
-        <h2 class="p-5 text-black">{{ selectedRestaurant.name }}</h2>
-        <div class="row">
-            <div class="col-md-6" v-for="dish in dishes" :key="dish.id">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ dish.name }}</h5>
-                        <p class="card-text">{{ dish.description }}</p>
-                    </div>
-                </div>
+        <h2 class="text-black mt-5">Menu del ristorante</h2>
+        <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
+            <h3 v-if="restaurant.id === selectedRestaurantId">{{ restaurant.name }}</h3>
+            <div v-for="dish in restaurant.dishes" :key="dish.id" v-if="restaurant.id === selectedRestaurantId">
+                <h4>{{ dish.name }}</h4>
+                <p>{{ dish.description }}</p>
             </div>
         </div>
     </div>
