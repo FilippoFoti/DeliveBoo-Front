@@ -58,7 +58,7 @@ export default {
 </script>
 
 <template>
-    <header>
+    <header class="shadow">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
                 <router-link to="/">
