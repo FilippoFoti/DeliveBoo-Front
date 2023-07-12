@@ -5,6 +5,7 @@ export default {
     name: "homePage",
     data() {
         return {
+            state,
             types: [],
             restaurants: [],
             selectedType: [],
@@ -59,7 +60,7 @@ export default {
     </div>
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
-        <div class="d-flex gap-3">
+        <div class="d-flex gap-3 my-3">
             <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
                 <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
                     @change="getRestaurants" class="form-check-input" />
@@ -69,25 +70,22 @@ export default {
             </div>
         </div>
         <div class="row row-cols-4 g-3">
-            <div class="col" v-for="restaurant in restaurants" v-if="selectedType.length === 0">
+            <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
                 <div class="card h-100">
-                    <img :src="restaurant.image" alt="" class="card-image-top mw-100 h-100">
+                    <img :src="state.imagePath(restaurant.image)" alt="" class="card-image-top mw-100 h-100">
                     <div class="card-body">
                         <h5 class="card-title">{{ restaurant.name }}</h5>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col my-2" v-else v-for="restaurant in restaurants" :key="restaurant.id">
-                <div class="card h-100">
-                    <img :src="restaurant.image" alt="" class="card-image-top mw-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <p>Cucina:
+                            <span v-for="(type, index) in restaurant.types" :key="type.id">
+                                {{ type.name }}<span v-if="index < restaurant.types.length - 1">, </span>
+                            </span>
+                        </p>
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- <div class="d-flex gap-3">
             <div class="row row-cols-3 d-flex align-items-center justify-content-center">
                 <div class="col" v-if="selectedType.length > 0">
