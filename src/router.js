@@ -32,9 +32,10 @@ const router = createRouter({
             component: ContactPage,
         },
         {
-            path: "/restaurant_menu",
+            path: "/restaurant_menu/:id",
             name: "restaurant_menu",
             component: RestaurantMenuPage,
+            props: true
         },
         {
             path: "/payment",
