@@ -60,45 +60,61 @@ export default {
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
         <div class="d-flex gap-3">
-            <div class="row row-cols-3 d-flex align-items-center justify-content-center">
-                <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
-                    <div class="card p-0 mx-2 my-3 shadow">
-                        <figure class="m-0">
-                            <img :src="typeItem.icon">
-                        </figure>
-                        <div class="card-body d-flex justify-content-center">
-                            <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
-                                @change="getRestaurants" class="form-check-input me-2" />
-                            <label :for="'type_' + typeItem.id" class="form-check-label fw-bold">
-                                {{ typeItem.name }}
-                            </label>
-                        </div>
+            <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
+                <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
+                    @change="getRestaurants" class="form-check-input" />
+                <label :for="'type_' + typeItem.id" class="form-check-label">
+                    {{ typeItem.name }}
+                </label>
+            </div>
+        </div>
+        <div class="row row-cols-4 g-3">
+            <div class="col" v-for="restaurant in restaurants" v-if="selectedType.length === 0">
+                <div class="card h-100">
+                    <img :src="restaurant.image" alt="" class="card-image-top mw-100 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
-                <div class="prova">
-                    <div>
-                        <ul v-if="selectedType.length > 0">
-                            <li v-for="restaurant in restaurants" :key="restaurant.id">
-                                {{ restaurant.name }}
-                            </li>
-                        </ul>
-                        <ul v-else>
-                            <li v-for="restaurant in restaurants" :key="restaurant.id">
-                                {{ restaurant.name }}
-                            </li>
-                        </ul>
-
+            </div>
+            <div class="col my-2" v-else v-for="restaurant in restaurants" :key="restaurant.id">
+                <div class="card h-100">
+                    <img :src="restaurant.image" alt="" class="card-image-top mw-100 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- <div class="d-flex gap-3">
+            <div class="row row-cols-3 d-flex align-items-center justify-content-center">
+                <div class="col" v-if="selectedType.length > 0">
+                    <div v-for="restaurant in restaurants" :key="restaurant.id">
+                        <img :src="restaurant.image" alt="">
+                        {{ restaurant.name }}
+                    </div>
+                </div>
+                <div class="col" v-else v-for="restaurant in restaurants" :key="restaurant.id">
+                    <div class="card">
+                        <img :src="restaurant.image" alt="" class="card-image-top mw-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ restaurant.name }}</h5>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
     </div>
     <img class="wave-2" src="../assets/img/wave-2.svg" alt="">
     <div class="section-2">
         <div class="container">
             <div class="row row-cols-2">
                 <div class="col">
-                    <h2 class="text-center text-white fw-bold fs-1">Ordina il tuo cibo preferito con l'app DeliveBoo</h2>
+                    <h2 class="text-center text-white fw-bold fs-1">Ordina il tuo cibo preferito con l'app DeliveBoo
+                    </h2>
                     <p class="text-center text-white fs-5">Paga in app, accumula punti, monitora i tuoi ordini in tempo
                         reale e molto altro.</p>
                 </div>
