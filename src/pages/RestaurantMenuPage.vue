@@ -31,13 +31,20 @@ export default {
 </script>
 
 <template>
-    <div class="container pt-5">
-        <h2 class="text-black mt-5">Menu del ristorante</h2>
-        <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
-            <h3 v-if="restaurant.id === selectedRestaurantId">{{ restaurant.name }}</h3>
-            <div v-for="dish in restaurant.dishes" :key="dish.id" v-if="restaurant.id === selectedRestaurantId">
-                <h4>{{ dish.name }}</h4>
-                <p>{{ dish.description }}</p>
+    <div class="container">
+        <div v-for="restaurant in restaurants" :key="restaurant.id">
+            <h3 v-if="restaurant.id === selectedRestaurantId">Menu: {{ restaurant.name }}</h3>
+            <div class="row row-cols-4">
+                <div v-for="dishe in restaurant.dishes" :key="dishe.id" v-if="restaurant.id === selectedRestaurantId"
+                    class="col">
+                    <div class="card">
+                        <img :src="state.imagePath(dishe.image)" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4>{{ dishe.name }}</h4>
+                            <p>{{ dishe.description }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -45,4 +52,8 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+h3 {
+    margin-top: 90px;
+}
 </style>
