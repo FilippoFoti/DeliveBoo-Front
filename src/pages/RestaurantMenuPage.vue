@@ -155,7 +155,7 @@ export default {
             </div>
             <div>
                 <button @click="clearCart" class="btn btn-primary my-2">Svuota</button>
-                <router-link to="payment" class="btn btn-primary"> Procedi al pagamento </router-link>
+                <router-link to="/payment" class="btn btn-primary"> Procedi al pagamento </router-link>
             </div>
         </div>
     </div>
