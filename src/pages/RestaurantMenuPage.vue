@@ -100,6 +100,9 @@ export default {
         saveCartToLocalStorage() {
             localStorage.setItem("cart", JSON.stringify(this.cart));
         },
+        isSameRestaurantInCart(selectedRestaurantId) {
+            return this.cart.every((item) => item.restaurant_id === this.selectedRestaurantId);
+        }
     }
 
 }
@@ -107,17 +110,21 @@ export default {
 
 <template>
     <div class="container">
-        <div v-for="restaurant in restaurants" :key="restaurant.id">
+        <div v-for="restaurant in  restaurants " :key="restaurant.id">
             <h3 id="ristorante" v-if="restaurant.id === selectedRestaurantId">Menu: {{ restaurant.name }}</h3>
             <div class="row row-cols-4">
-                <div v-for="dishe in restaurant.dishes" :key="dishe.id" v-if="restaurant.id === selectedRestaurantId"
+                <div v-for="dishe in  restaurant.dishes " :key="dishe.id" v-if="restaurant.id === selectedRestaurantId"
                     class="col">
                     <div class="card h-100">
                         <img :src="state.imagePath(dishe.image)" class="card-img-topx" alt="...">
                         <div class="card-body">
                             <h4>{{ dishe.name }}</h4>
                             <p>{{ dishe.description }}</p>
-                            <button @click="addToCart(dishe)" class="btn btn-primary my-3">Aggiungi al carrello</button>
+                            <!-- id del ristorante nel piatto deve essere uguale al selectedRestauarntId -->
+                            <div></div>
+                            <button @click="addToCart(dishe)" class="btn btn-primary my-3"
+                                :disabled="!isSameRestaurantInCart(dishe.selectedRestaurantId)">Aggiungi al
+                                carrello</button>
                         </div>
                     </div>
                 </div>
@@ -127,7 +134,7 @@ export default {
             <h2>Carrello</h2>
             <div class="p-0">
                 <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
-                <div v-for="item in cart" :key="item.id" class="list-unstyled">
+                <div v-for=" item  in  cart " :key="item.id" class="list-unstyled">
                     <div>
                         <h4>{{ item.name }}</h4>
                         <p>€ {{ item.price }}</p>
