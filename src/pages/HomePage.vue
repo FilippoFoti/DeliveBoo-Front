@@ -1,41 +1,48 @@
 <script>
+import axios from 'axios';
+import { state } from '../state';
 export default {
     name: "homePage",
     data() {
         return {
-            image: [
-                {
-                    name: 'Italiana',
-                    img: '/src/assets/img/pizza.jpg'
-                },
-                {
-                    name: 'Americana',
-                    img: '/src/assets/img/hamburger.jpg'
-                },
-                {
-                    name: 'Cinese',
-                    img: '/src/assets/img/sushi.jpg'
-                },
-                {
-                    name: 'Messicana',
-                    img: '/src/assets/img/nachos.jpg'
-                },
-                {
-                    name: 'Turca',
-                    img: '/src/assets/img/kebab.jpg'
-                }
-            ]
+            types: [],
+            restaurants: [],
+            selectedType: [],
+            selectedRestaurant: null,
         }
     },
+    mounted() {
+        this.getTypes();
+        this.getRestaurants();
+    },
     methods: {
-        showDiv(item) {
-            this.image.forEach((image) => {
-                if (image !== item) {
-                    image.showDiv = false;
-                }
-            });
-            item.showDiv = !item.showDiv;
-        }
+        getTypes() {
+            axios
+                .get("http://localhost:8000/api/types")
+                .then((resp) => {
+                    this.types = resp.data.results;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
+        getRestaurants() {
+            const params = {};
+
+            if (this.selectedType.length > 0 && this.selectedType.includes("all")) {
+                params.type_id = [];
+            } else {
+                params.type_id = this.selectedType;
+            }
+            axios
+                .get("http://localhost:8000/api/restaurants", { params })
+                .then((resp) => {
+                    this.restaurants = resp.data.results;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        },
     }
 }
 </script>
@@ -52,18 +59,36 @@ export default {
     </div>
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
-        <div class="row row-cols-3 d-flex align-items-center justify-content-center">
-            <div class="col p-0" v-for="item in image" :key="item.name">
-                <div class="card p-0 mx-2 my-3 shadow" @click="showDiv(item)">
-                    <figure class="m-0">
-                        <img :src="item.img" class="rounded" alt="">
-                    </figure>
-                    <div class="card-body">
-                        <h5 class="card-title text-center m-2">{{ item.name }}</h5>
+        <div class="d-flex gap-3">
+            <div class="row row-cols-3 d-flex align-items-center justify-content-center">
+                <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
+                    <div class="card p-0 mx-2 my-3 shadow">
+                        <figure class="m-0">
+                            <img :src="typeItem.icon">
+                        </figure>
+                        <div class="card-body d-flex justify-content-center">
+                            <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
+                                @change="getRestaurants" class="form-check-input me-2" />
+                            <label :for="'type_' + typeItem.id" class="form-check-label fw-bold">
+                                {{ typeItem.name }}
+                            </label>
+                        </div>
                     </div>
                 </div>
-                <div class="div-below" v-if="item.showDiv">
-                    <h5 class="text-center">Ciao</h5>
+                <div class="prova">
+                    <div>
+                        <ul v-if="selectedType.length > 0">
+                            <li v-for="restaurant in restaurants" :key="restaurant.id">
+                                {{ restaurant.name }}
+                            </li>
+                        </ul>
+                        <ul v-else>
+                            <li v-for="restaurant in restaurants" :key="restaurant.id">
+                                {{ restaurant.name }}
+                            </li>
+                        </ul>
+
+                    </div>
                 </div>
             </div>
         </div>
