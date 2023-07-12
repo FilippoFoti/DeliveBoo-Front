@@ -80,31 +80,15 @@ export default {
                                 {{ type.name }}<span v-if="index < restaurant.types.length - 1">, </span>
                             </span>
                         </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <router-link :to="{ name: 'restaurant_menu', params: { id: restaurant.id } }"
+                            class="btn btn-primary mb-2">
+                            Vai nel menu
+                        </router-link>
+
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- <div class="d-flex gap-3">
-            <div class="row row-cols-3 d-flex align-items-center justify-content-center">
-                <div class="col" v-if="selectedType.length > 0">
-                    <div v-for="restaurant in restaurants" :key="restaurant.id">
-                        <img :src="restaurant.image" alt="">
-                        {{ restaurant.name }}
-                    </div>
-                </div>
-                <div class="col" v-else v-for="restaurant in restaurants" :key="restaurant.id">
-                    <div class="card">
-                        <img :src="restaurant.image" alt="" class="card-image-top mw-100">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ restaurant.name }}</h5>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
     <img class="wave-2" src="../assets/img/wave-2.svg" alt="">
     <div class="section-2">
