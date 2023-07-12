@@ -75,8 +75,8 @@ export default {
                     <img :src="state.imagePath(restaurant.image)" alt="" class="card-image-top mw-100 h-100">
                     <div class="card-body">
                         <h5 class="card-title">{{ restaurant.name }}</h5>
-                        <p>Cucina:
-                            <span v-for="(type, index) in restaurant.types" :key="type.id">
+                        <p>
+                            <span class="badge rounded-pill text-bg-warning" v-for="(type, index) in restaurant.types" :key="type.id">
                                 {{ type.name }}<span v-if="index < restaurant.types.length - 1">, </span>
                             </span>
                         </p>
