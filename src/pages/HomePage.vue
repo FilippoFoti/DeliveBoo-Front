@@ -60,8 +60,8 @@ export default {
     </div>
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
-        <div class="d-flex gap-3 my-3">
-            <div class="form-check" v-for="typeItem in types" :key="typeItem.id">
+        <div class="d-flex justify-content-center gap-3 my-3">
+            <div class="form-check fw-bold" v-for="typeItem in types" :key="typeItem.id">
                 <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
                     @change="getRestaurants" class="form-check-input" />
                 <label :for="'type_' + typeItem.id" class="form-check-label">
@@ -69,19 +69,23 @@ export default {
                 </label>
             </div>
         </div>
-        <div class="row row-cols-4 g-3">
+        <div class="row row-cols-4 g-5">
             <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
-                <div class="card h-100">
-                    <img :src="state.imagePath(restaurant.image)" alt="" class="card-image-top mw-100 h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ restaurant.name }}</h5>
-                        <p>
-                            <span class="badge rounded-pill text-bg-warning" v-for="(type, index) in restaurant.types" :key="type.id">
-                                {{ type.name }}<span v-if="index < restaurant.types.length - 1">, </span>
-                            </span>
-                        </p>
+                <div class="card h-100 shadow">
+                    <figure class="m-0">
+                        <img :src="state.imagePath(restaurant.image)" alt="" class="card-image-top">
+                    </figure>
+                    <div class="card-body text-center">
+                        <ul class="m-0 p-0 d-flex gap-1 flex-wrap justify-content-end">
+                            <li class="badge rounded-pill py-1 px-2" v-for="(type, index) in restaurant.types"
+                                :key="type.id">
+                                {{ type.name }}
+                                <span v-if="index < restaurant.types.length - 1"></span>
+                            </li>
+                        </ul>
+                        <h5 class="card-title fw-bold text-decoration-underline">{{ restaurant.name }}</h5>
                         <router-link :to="{ name: 'restaurant_menu', params: { id: restaurant.id } }"
-                            class="btn btn-primary mb-2">
+                            class="btn fw-bold my-2">
                             Vai nel menu
                         </router-link>
 
@@ -176,7 +180,7 @@ export default {
 
     figure {
         width: 100%;
-        height: 250px;
+        height: 200px;
 
         img {
             height: 100%;
@@ -185,10 +189,48 @@ export default {
         }
     }
 
-    h5 {
-        font-weight: bold;
-        font-size: 1.5rem;
+    // .form-check-input {
+    //     background-color: #F2C802;
+    //     color: #DC2F02;
+    // }
+
+    // .form-check-input:focus {
+    //     background-color: #DC2F02;
+    // }
+
+    .card {
+        position: relative;
+
+        ul {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+
+            li {
+                background-color: #F2C802;
+                color: #03071E;
+            }
+        }
+
+        h5 {
+            font-size: 1.5rem;
+            color: #03071E;
+        }
+
+        a {
+            padding: 5px 10px;
+            background-color: #F2C802;
+            border: 1px solid #FAA307;
+            border-radius: 10px;
+            color: #03071E;
+
+            &:hover {
+                background-color: #FAA307;
+            }
+        }
     }
+
+
 }
 
 .wave-2 {
