@@ -11,10 +11,6 @@ export default {
                     routeName: "home"
                 },
                 {
-                    name: "Restaurants",
-                    routeName: "restaurants"
-                },
-                {
                     name: "About Us",
                     routeName: "about"
                 },
