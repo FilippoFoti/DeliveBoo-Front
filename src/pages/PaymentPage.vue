@@ -6,7 +6,12 @@ export default {
     return {
       clientToken: [],
       cartArray: [],
-      hostedFieldsInstance: false
+      hostedFieldsInstance: false,
+      name: "",
+      surname: "",
+      email: "",
+      phone: "",
+      address: ""
     };
   },
 
@@ -48,9 +53,8 @@ export default {
           .catch(err => {
             console.log(err)
           });
-      }
+      },
     )
-
   },
   methods: {
     getArray() {
@@ -58,12 +62,33 @@ export default {
     },
     itemsForPay() {
       this.cartArray = this.getArray();
+    },
+    sendPayment() {
+      if (this.hostedFieldsInstance) {
+        this.hostedFieldsInstance.tokenize().then(payload => {
+          axios.post('http://127.0.0.1:8000/api/make/payment'), {
+            cart: this.cartArray,
+            token: payload.nonce,
+            customer_name: this.name,
+            customer_surname: this.surname,
+            email: this.email,
+            phone: this.phone,
+            address: this.address
+          }
+        }).then(resp => {
+          localStorage.clear()
+          // this.$router.push("/restaurants") per reindirizzare
+        }).cath(err => {
+          console.log(err);
+        })
+      }
     }
   }
 };
 </script>
 
 <template>
+  v.model
   <form>
     <div class="form-group">
       <label>Credit Card Number</label>
