@@ -152,7 +152,7 @@ export default {
 #hero {
     width: 100%;
     height: 100vh;
-    background-image: url('../assets/img/About.jpg');
+    background-image: url('../assets/img/hero-about.jpg');
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -164,7 +164,7 @@ export default {
 
     p {
         font-size: 1.8rem;
-        color: #242424;
+        color: #03071E;
     }
 }
 
@@ -180,7 +180,7 @@ export default {
 
     p {
         font-size: 1.1rem;
-        color: #242424;
+        color: #03071E;
     }
 }
 
