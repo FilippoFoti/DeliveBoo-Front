@@ -76,6 +76,7 @@ export default {
             address: this.address
           }
         }).then(resp => {
+          console.log(resp);
           localStorage.clear()
           this.$router.push("/")
         }).cath(err => {
