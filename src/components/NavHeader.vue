@@ -150,6 +150,7 @@ header {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                color: #03071E;
 
                 @media screen and (max-width: 992px) {
                     color: white;
@@ -232,6 +233,7 @@ header {
                     background-color: #F2C802;
                     padding: 5px 10px;
                     border-radius: 10px;
+                    border: 1px solid #FAA307;
                     margin: 0 5px;
                     font-weight: bold;
                     color: #03071E;
@@ -289,6 +291,7 @@ header {
                     box-shadow: none;
                 }
 
+                
                 span {
                     padding: 9px 15px;
                     position: absolute;
@@ -296,9 +299,8 @@ header {
                     left: 20px;
                     border-radius: 10px 0 0 10px;
                     background-color: #F2C802;
-                    color: white;
+                    color: #03071E;
                 }
-
                 .close-search {
                     background-color: #F2C802;
                     border-radius: 10px;
