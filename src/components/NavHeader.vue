@@ -4,7 +4,11 @@ export default {
     data() {
         return {
             showAccount: false,
+            showMenuIcon: false,
             showInput: false,
+            showSearchIcon: false,
+            showCanvas: false,
+            showCartIcon: false,
             navList: [
                 {
                     name: "Home",
@@ -23,11 +27,9 @@ export default {
     },
 
     methods: {
-        showMenu() {
-            this.showAccount = true;
-        },
-        hideMenu() {
-            this.showAccount = false;
+        // CHANGE PAGE
+        buttonClicked(button, link) {
+            window.open(link, '_blank');
         },
         // buttonClicked(button) {
         //     if (button === 'registrati') {
@@ -36,19 +38,56 @@ export default {
         //         window.location.href = 'http://localhost:8000/login';
         //     }
         // }
-        buttonClicked(button, link) {
-            window.open(link, '_blank');
+
+        // ACTIVE PAGE
+        isActive(route) {
+            return this.$route.name === route;
         },
 
+        // ACTIVE REGISTRAZIONE E LOGIN
+        showMenu() {
+            if(this.showAccount) {
+            this.hideMenu();
+            this.showMenuIcon = false;
+
+            } else {
+            this.showAccount = true;
+            this.showMenuIcon = !this.showMenuIcon;
+            }
+        },
+        hideMenu() {
+            this.showAccount = false;
+            this.showMenuIcon = false;
+        },
+        
+        
+        // ACTIVE SEARCH
         showSearch() {
+            if(this.showInput) {
+            this.hideSearch();
+            this.showSearchIcon = false;
+
+            } else {
             this.showInput = true;
+            this.showSearchIcon = !this.showSearchIcon;
+            }
         },
         hideSearch() {
             this.showInput = false;
+            this.showSearchIcon = false;
         },
-        isActive(route) {
-            return this.$route.name === route;
-        }
+
+        // ACTIVE CART
+        showCart() {
+            this.showCanvas = true;
+            this.showCartIcon = !this.showCartIcon;
+        },
+        hideCart() {
+            this.showCanvas = false;
+            this.showCartIcon = false;
+        },
+
+        
     }
 }
 </script>
@@ -76,8 +115,9 @@ export default {
                         </li>
                     </ul>
                     <ul class="icon p-0 m-0">
-                        <li @click="showSearch"><i class="fa-solid fa-magnifying-glass"></i></li>
-                        <li @click="showMenu"><i class="fa-regular fa-user"></i></li>
+                        <li @click="showSearch" :class="{ activeButton: showSearchIcon }"><i class="fa-solid fa-magnifying-glass"></i></li>
+                        <li @click="showMenu" :class="{ activeButton: showMenuIcon }"><i class="fa-regular fa-user"></i></li>
+                        <li @click="showCart" :class="{ activeButton: showCartIcon }"><i class="fa-solid fa-cart-shopping"></i></li>
                     </ul>
                 </div>
             </div>
@@ -204,6 +244,18 @@ header {
 
                     &:hover {
                         color: #FAA307;
+                    }
+                }
+
+                .activeButton {
+                    background-color: #F2C802;
+                    color: #03071E;
+                    border-radius: 50%;
+                    padding: 5px 10px;
+
+                    &:hover {
+                        color: #03071E;
+                        background-color: #FAA307;
                     }
                 }
             }
