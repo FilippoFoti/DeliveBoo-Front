@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     getArray() {
-      return JSON.parse(localStorage.getItem("cart")) || [];
+      return JSON.parse(localStorage.getItem("cart") || []);
     },
     itemsForPay() {
       this.cartArray = this.getArray();
@@ -66,22 +66,22 @@ export default {
     sendPayment() {
       if (this.hostedFieldsInstance) {
         this.hostedFieldsInstance.tokenize().then(payload => {
-          axios.post('http://127.0.0.1:8000/api/make/payment'), {
+          axios.post('http://127.0.0.1:8000/api/make/payment', {
             cart: this.cartArray,
             token: payload.nonce,
             customer_name: this.name,
-            customer_surname: this.surname,
+            customer_lastname: this.surname,
             email: this.email,
             phone: this.phone,
             address: this.address
-          }
-        }).then(resp => {
-          console.log(resp);
-          localStorage.clear()
-          this.$router.push("/")
-        }).cath(err => {
-          console.log(err);
+          }).then(resp => {
+            localStorage.clear();
+            this.$router.push('/');
+          })
         })
+          .catch(err => {
+            console.error(err);
+          })
       }
     },
     calculateTotal() {
@@ -134,7 +134,7 @@ export default {
       <div id="expiration-date" class="form-control"></div>
       <label class="form-label mt-3">CVV</label>
       <div id="cvv" class="form-control mb-3"></div>
-      <button type="submit" class="btn btn-primary my-3" @click="sendPayment()">Paga Ora</button>
+      <button type="submit" class="btn btn-primary my-3" @click.prevent="sendPayment()">Paga Ora</button>
     </form>
   </div>
 </template>
