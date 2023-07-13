@@ -112,6 +112,11 @@ export default {
     <div class="container">
         <div v-for="restaurant in restaurants" :key="restaurant.id">
             <h3 id="ristorante" v-if="restaurant.id === selectedRestaurantId">Menu: {{ restaurant.name }}</h3>
+            <div class="bg-warning" v-if="!isSameRestaurantInCart(restaurant.id) && restaurant.id === selectedRestaurantId">
+                <div class="text-center p-3 my-4">
+                    <p>Hai gia dei prodotti nel carrello, non puoi ordinare da più ristoranti.</p>
+                </div>
+            </div>
             <div class="row row-cols-4 flex-wrap" v-if="restaurant.id === selectedRestaurantId">
                 <div v-for="dishe in restaurant.dishes" :key="dishe.id">
                     <div class="col" v-if="dishe.visibility == 1">
@@ -127,6 +132,7 @@ export default {
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
