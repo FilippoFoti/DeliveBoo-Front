@@ -77,7 +77,7 @@ export default {
           }
         }).then(resp => {
           localStorage.clear()
-          this.$router.push("/")
+          this.$router.push("/restaurants")
         }).cath(err => {
           console.log(err);
         })
@@ -113,11 +113,11 @@ export default {
       </div>
 
 
-      <label class="form-label">Credit Card Number</label>
+      <label class="form-label">Numero della carta</label>
       <div id="credit-card-number" class="form-control"></div>
-      <label class="label mt-3">Expire Date</label>
+      <label class="form-label mt-3">Data di scadenza</label>
       <div id="expiration-date" class="form-control"></div>
-      <label class="label mt-3">CVV</label>
+      <label class="form-label mt-3">CVV</label>
       <div id="cvv" class="form-control mb-3"></div>
       <button type="submit" class="btn btn-primary my-3" @click="sendPayment()">Paga Ora</button>
     </form>
