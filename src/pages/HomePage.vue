@@ -67,7 +67,7 @@ export default {
             <div v-for="typeItem in types" :key="typeItem.id">
                 <input type="checkbox" :id="'box-' + typeItem.id" :value="typeItem.id" v-model="selectedType"
                     @change="getRestaurants" />
-                <label :for="'box-' + typeItem.id">
+                <label class="fw-bold" :for="'box-' + typeItem.id">
                     {{ typeItem.name }}
                 </label>
             </div>
@@ -199,7 +199,7 @@ export default {
         display: block;
         width: 20px;
         height: 20px;
-        border: 1px solid #fd7e14;
+        border: 3px solid #fd7e14;
         position: absolute;
         left: 0;
         top: 0;
