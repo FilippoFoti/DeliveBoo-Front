@@ -40,7 +40,7 @@ export default {
               },
               cvv: {
                 selector: "#cvv",
-                placeholder: "cvv"
+                placeholder: "123"
               },
               expirationDate: {
                 selector: "#expiration-date",
@@ -77,7 +77,7 @@ export default {
           }
         }).then(resp => {
           localStorage.clear()
-          // this.$router.push("/restaurants") per reindirizzare
+          this.$router.push("/restaurants")
         }).cath(err => {
           console.log(err);
         })
@@ -88,30 +88,51 @@ export default {
 </script>
 
 <template>
-  v.model
-  <form>
-    <div class="form-group">
-      <label>Credit Card Number</label>
-      <div id="credit-card-number" class="form-control"></div>
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-6">
-          <label>Expire Date</label>
-          <div id="expiration-date" class="form-control"></div>
-        </div>
-        <div class="col-6">
-          <label>CVV</label>
-          <div id="cvv" class="form-control"></div>
-        </div>
+  <div class="container">
+    <h3>Inserisci i tuoi dati</h3>
+    <form>
+      <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" v-model="name">
       </div>
-    </div>
-  </form>
+      <div class="mb-3">
+        <label class="form-label">Cognome</label>
+        <input type="text" class="form-control" v-model="surname">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-control" v-model="email">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Telefono cellulare</label>
+        <input type="text" class="form-control" v-model="phone">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Indirizzo</label>
+        <input type="text" class="form-control" v-model="address">
+      </div>
+
+
+      <label class="form-label">Numero della carta</label>
+      <div id="credit-card-number" class="form-control"></div>
+      <label class="form-label mt-3">Data di scadenza</label>
+      <div id="expiration-date" class="form-control"></div>
+      <label class="form-label mt-3">CVV</label>
+      <div id="cvv" class="form-control mb-3"></div>
+      <button type="submit" class="btn btn-primary my-3" @click="sendPayment()">Paga Ora</button>
+    </form>
+  </div>
 </template>
 <style scoped lang="scss">
 @use "../styles/general.scss" as *;
 
-.form-group {
-  padding-top: 300px;
+h3 {
+  padding-top: 100px;
+}
+
+#credit-card-number,
+#expiration-date,
+#cvv {
+  height: 38px;
 }
 </style>
