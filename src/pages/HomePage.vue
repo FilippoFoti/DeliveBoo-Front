@@ -63,11 +63,11 @@ export default {
 
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
-        <div class="d-flex justify-content-center gap-4 my-3">
-            <div class="form-check fw-bold" v-for="typeItem in types" :key="typeItem.id">
-                <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
-                    @change="getRestaurants" class="form-check-input" />
-                <label :for="'type_' + typeItem.id" class="form-check-label">
+        <div class="d-flex justify-content-center gap-4 my-3 my_checkbox">
+            <div v-for="typeItem in types" :key="typeItem.id">
+                <input type="checkbox" :id="'box-' + typeItem.id" :value="typeItem.id" v-model="selectedType"
+                    @change="getRestaurants" />
+                <label :for="'box-' + typeItem.id">
                     {{ typeItem.name }}
                 </label>
             </div>
@@ -171,6 +171,55 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+.my_checkbox {
+    margin: auto;
+    padding: 50px;
+    // background: #F2C802;
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="checkbox"]+label {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 20px;
+        color: #03071E;
+        cursor: pointer;    
+    }
+
+    input[type="checkbox"]+label:last-child {
+        margin-bottom: 0;
+    }
+
+    input[type="checkbox"]+label:before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #fd7e14;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: .6;
+        -webkit-transition: all .12s, border-color .08s;
+        transition: all .12s, border-color .08s;
+    }
+
+    input[type="checkbox"]:checked+label:before {
+        width: 10px;
+        top: -5px;
+        left: 5px;
+        border-radius: 0;
+        opacity: 1;
+        border-top-color: transparent;
+        border-left-color: transparent;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
 
 .text-shadow {
     text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
