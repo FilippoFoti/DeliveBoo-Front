@@ -225,8 +225,6 @@ export default {
     text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
 }
 
-
-
 #hero {
     width: 100%;
     height: 100vh;
@@ -370,13 +368,13 @@ export default {
             margin: 10px;
 
             i {
-                color: #03071E;
+                color: white;
                 padding-right: 15px;
             }
 
             p {
                 font-size: 1rem;
-                color: #e9ecef;
+                color: white;
             }
 
             h4 {

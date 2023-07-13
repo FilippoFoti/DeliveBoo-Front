@@ -102,6 +102,24 @@ export default {
         },
         isSameRestaurantInCart(selectedRestaurantId) {
             return this.cart.every((item) => item.restaurant_id === this.selectedRestaurantId);
+        },
+
+
+        // SHORT DESCRIPTION
+        shortDescription(description, maxLength) {
+            if (description.length > maxLength) {
+                return description.substring(0, maxLength) + '...';
+            }
+            return description;
+        },
+        toggleDescription(dishe) {
+            if (!dishe.showFullDescription) {
+                dishe.originalDescription = dishe.description;
+                dishe.description = dishe.description + dishe.hiddenDescription;
+            } else {
+                dishe.description = dishe.originalDescription;
+            }
+            dishe.showFullDescription = !dishe.showFullDescription;
         }
     }
 
@@ -120,11 +138,24 @@ export default {
             <div class="row row-cols-4 flex-wrap" v-if="restaurant.id === selectedRestaurantId">
                 <div v-for="dishe in restaurant.dishes" :key="dishe.id">
                     <div class="col" v-if="dishe.visibility == 1">
-                        <div class="card h-100">
-                            <img :src="state.imagePath(dishe.image)" class="card-img-topx" alt="...">
+                        <div class="card h-100 w-100">
+                            <figure class="m-0 d-flex justify-content-center">
+                                <img :src="state.imagePath(dishe.image)" class="card-image-top" alt="...">
+                            </figure>
                             <div class="card-body">
                                 <h4>{{ dishe.name }}</h4>
-                                <p>{{ dishe.description }}</p>
+                                <p>
+                                    <span v-if="!dishe.showFullDescription">
+                                        {{ shortDescription(dishe.description, 100) }}
+                                        <a href="#" @click="toggleDescription(dishe)">Mostra di più</a>
+                                    </span>
+                                    <span v-else>
+                                        {{ dishe.description }}
+                                        <a href="#" @click="toggleDescription(dishe)">Mostra meno</a>
+                                    </span>
+                                </p>
+                                <!-- <p v-show="dishe.showFullDescription">{{ dishe.description }}</p> -->
+
                                 <p>{{ dishe.price }} €</p>
                                 <button @click="addToCart(dishe)" class="btn btn-primary my-3"
                                     :disabled="!isSameRestaurantInCart(dishe.selectedRestaurantId)">Aggiungi al
@@ -168,7 +199,21 @@ export default {
 @use "../styles/general.scss" as *;
 
 #ristorante {
-    padding-top: 100px;
+    padding-top: 110px;
+    font-size: 2.5rem;
+    color: #03071E;
+    font-weight: bold;
+
+    figure {
+        width: 100%;
+        height: 200px;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
 }
 
 .cart-container {
