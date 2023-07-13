@@ -51,16 +51,19 @@ export default {
 <template>
     <div id="hero" class="d-flex align-items-center justify-content-center">
         <div class="container text-center">
-            <p class="m-0">Il servizio di consegna di cibo n. 1 al mondo</p>
-            <h1 class="pb-4">Consegnamo il tuo cibo preferito fresco e veloce</h1>
-            <router-link to="/restaurants">
+            <p class="m-0 text-shadow">Il servizio di consegna di cibo n. 1 al mondo</p>
+            <h1 class="pb-4 text-shadow">Consegnamo il tuo cibo preferito fresco e veloce</h1>
+            <a href="#click" class="btn">
                 Cosa vuoi mangiare?
-            </router-link>
+            </a>
         </div>
     </div>
+
+    <div id="click"></div>
+
     <div class="container section-1 my-5">
         <h2 class="text-center mb-4">Le nostre tipologie di cucina</h2>
-        <div class="d-flex justify-content-center gap-3 my-3">
+        <div class="d-flex justify-content-center gap-4 my-3">
             <div class="form-check fw-bold" v-for="typeItem in types" :key="typeItem.id">
                 <input type="checkbox" :id="'type_' + typeItem.id" :value="typeItem.id" v-model="selectedType"
                     @change="getRestaurants" class="form-check-input" />
@@ -69,6 +72,7 @@ export default {
                 </label>
             </div>
         </div>
+
         <div class="row row-cols-4 g-5">
             <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
                 <div class="card h-100 shadow">
@@ -88,24 +92,25 @@ export default {
                             class="btn fw-bold my-2">
                             Vai nel menu
                         </router-link>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <img class="wave-2" src="../assets/img/wave-2.svg" alt="">
+
     <div class="section-2">
         <div class="container">
-            <div class="row row-cols-2">
+            <div class="row row-cols-2 d-flex align-items-center">
                 <div class="col">
-                    <h2 class="text-center text-white fw-bold fs-1">Ordina il tuo cibo preferito con l'app DeliveBoo
+                    <h2 class="text-center text-white fw-bold text-shadow">Ordina il tuo cibo preferito con l'app DeliveBoo
                     </h2>
-                    <p class="text-center text-white fs-5">Paga in app, accumula punti, monitora i tuoi ordini in tempo
-                        reale e molto altro.</p>
-                </div>
-                <div class="col d-flex align-items-center justify-content-center">
-                    <div class="download d-flex">
+                    <p class="text-center text-white text-shadow">Paga in app, accumula punti, monitora i tuoi ordini in
+                        tempo
+                        reale e molto altro.
+                    </p>
+                    <div class="download d-flex justify-content-center">
                         <div class="button d-flex align-items-center">
                             <i class="fa-brands fa-apple fa-2xl"></i>
                             <div class="text">
@@ -122,14 +127,56 @@ export default {
                         </div>
                     </div>
                 </div>
+                <div class="col text-center">
+                    <img src="../assets/img/cellulare.png" alt="" class="w-50">
+                </div>
             </div>
         </div>
     </div>
-    <img class="wave-rotate" src="../assets/img/wave-2.svg" alt="">
+
+    <!-- <img class="wave-rotate" src="../assets/img/wave-2.svg" alt=""> -->
+
+    <div class="container section-3 my-5">
+        <div class="row py-3">
+            <div class="col d-flex align-items-center flex-column justify-content-start">
+                <div class="circle d-flex align-items-center justify-content-center shadow">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <p class="text-center pt-4">
+                    Il nostro team di assistenza è sempre a disposizione: parla con noi via Chat, Mail o direttamente al
+                    telefono!
+                </p>
+            </div>
+            <div class="col d-flex align-items-center flex-column justify-content-center">
+                <div class="circle d-flex align-items-center justify-content-center shadow">
+                    <i class="fa-regular fa-credit-card"></i>
+                </div>
+                <p class="text-center pt-4">
+                    I pagamenti online sono protetti e certificati. Potrai selezionare tra diverse modalità di pagamento e
+                    scegliere quella più adatta a te!
+                </p>
+            </div>
+            <div class="col d-flex align-items-center flex-column justify-content-center">
+                <div class="circle d-flex align-items-center justify-content-center shadow">
+                    <i class="fa-solid fa-piggy-bank"></i>
+                </div>
+                <p class="text-center pt-4">
+                    Scegli tu quando ricevere il tuo ordine: la consegna è gratuita sopra una certa soglia, potrai
+                    verificarlo direttamente al chechout!
+                </p>
+            </div>
+        </div>
+    </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+.text-shadow {
+    text-shadow: 10px 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+
 
 #hero {
     width: 100%;
@@ -138,42 +185,49 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 
     p {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         color: white;
     }
 
     h1 {
         width: 70%;
         margin: 0 auto;
-        font-size: 2.7rem;
+        font-size: 4rem;
         color: white;
         font-weight: bold;
     }
 
     a {
         text-decoration: none;
-        border: 1px solid #F2C802;
+        border: 1px solid #FAA307;
         border-radius: 10px;
         background-color: #F2C802;
         padding: 10px 15px;
         font-weight: bold;
-        color: white;
+        color: #03071E;
         font-size: 1.2rem;
 
         &:hover {
             background-color: #FAA307;
-            transform: scale(1.5);
-            transition: 1s;
+            transform: scale(1.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
         }
     }
+}
+
+#click {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
 }
 
 .section-1 {
 
     h2 {
-        font-size: 2rem;
+        font-size: 2.5rem;
         color: #03071E;
         font-weight: bold;
     }
@@ -189,17 +243,28 @@ export default {
         }
     }
 
-    // .form-check-input {
-    //     background-color: #F2C802;
-    //     color: #DC2F02;
-    // }
+    .form-check {
+        cursor: pointer;
 
-    // .form-check-input:focus {
-    //     background-color: #DC2F02;
-    // }
+        label {
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .form-check-input {
+            background-color: #F2C802;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #FAA307;
+        }
+    }
 
     .card {
         position: relative;
+        border-radius: 10px;
 
         ul {
             position: absolute;
@@ -226,11 +291,11 @@ export default {
 
             &:hover {
                 background-color: #FAA307;
+                transform: scale(1.1);
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
             }
         }
     }
-
-
 }
 
 .wave-2 {
@@ -238,51 +303,68 @@ export default {
 }
 
 .section-2 {
-    height: 200px;
     background-color: #DC2F02;
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1.3rem;
+    }
 
     .download {
         .button {
             padding: 15px;
             border-radius: 10px;
-            border: 1px solid white;
+            border: 2px solid #03071E;
             margin: 10px;
-            background-color: #03071E;
 
             i {
-                color: white;
+                color: #03071E;
                 padding-right: 15px;
             }
 
             p {
                 font-size: 1rem;
-                color: grey;
+                color: #e9ecef;
             }
 
             h4 {
                 font-size: 1.2rem;
-                color: white;
+                color: #03071E;
             }
 
             &:hover {
-                background-color: #242947;
                 cursor: pointer;
                 transform: scale(1.1);
-                transition: 1s;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
             }
         }
-
     }
 }
 
-.wave-rotate {
-    width: 100%;
-    transform: rotate(180deg);
-}
+// .wave-rotate {
+//     width: 100%;
+//     transform: rotate(180deg);
+// }
+.section-3 {
 
-.div-below {
-    background-color: #e9ecef;
-    padding: 10px;
-    margin-top: 10px;
-}
-</style>
+    .circle {
+        width: 100px;
+        height: 100px;
+        background-color: #e9ecef;
+        border-radius: 50%;
+        // border: 1px solid #FAA307;
+
+        i {
+            color: #03071E;
+            font-size: 2rem;
+        }
+    }
+
+    p {
+        font-size: 1.1rem;
+        color: #03071E;
+    }
+}</style>
