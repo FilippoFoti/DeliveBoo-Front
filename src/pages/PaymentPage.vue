@@ -44,7 +44,7 @@ export default {
               },
               expirationDate: {
                 selector: "#expiration-date",
-                placeholder: "scadenza"
+                placeholder: "XX/XX"
               }
             }
           }
@@ -77,11 +77,18 @@ export default {
           }
         }).then(resp => {
           localStorage.clear()
-          this.$router.push("/restaurants")
+          this.$router.push("/")
         }).cath(err => {
           console.log(err);
         })
       }
+    },
+    calculateTotal() {
+      let total = 0;
+      for (const item of this.cartArray) {
+        total += item.count * item.price;
+      }
+      return parseFloat(total.toFixed(2));
     }
   }
 };
@@ -89,8 +96,15 @@ export default {
 
 <template>
   <div class="container">
-    <h3>Inserisci i tuoi dati</h3>
+    <h3 class="cart">Il tuo carrello</h3>
+    <ul>
+      <li v-for="item in cartArray" :key="item.id">
+        {{ item.name }} x {{ item.count }} - {{ item.count * item.price }} €
+      </li>
+    </ul>
+    <h5>Totale: {{ calculateTotal() }} €</h5>
     <form>
+      <h3>Inserisci i tuoi dati</h3>
       <div class="mb-3">
         <label class="form-label">Nome</label>
         <input type="text" class="form-control" v-model="name">
@@ -126,7 +140,7 @@ export default {
 <style scoped lang="scss">
 @use "../styles/general.scss" as *;
 
-h3 {
+.cart {
   padding-top: 100px;
 }
 
