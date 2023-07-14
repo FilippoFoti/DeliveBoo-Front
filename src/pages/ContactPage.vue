@@ -14,7 +14,7 @@ export default {
             </div>
             <div class="col-5 mt-5">
                 <div class="card shadow p-4">
-                    <div class="card-body  text-center p-4">
+                    <div class="card-body text-center p-4">
                         <h2 class="text-center fw-bold mb-4">Invia messaggio</h2>
                         <form action="" class="d-flex flex-column gap-2 mb-4">
                             <label for=""></label>
