@@ -59,8 +59,8 @@ export default {
 <template>
     <div id="hero" class="d-flex align-items-center justify-content-center">
         <div class="container text-center">
-            <div v-if="$route.query.payment_success === 'true'" class="alert alert-success">
-                <p class="text-center  my-4">Pagamento avvenuto con successo, <br>
+            <div v-if="$route.query.payment_success === 'true'" class="alert alert-warning">
+                <p class="text-center text-black my-4">Pagamento avvenuto con successo, <br>
                     il tuo ordine sta arrivando!</p>
                 <button @click="closePaymentSuccess" class="btn btn-primary close-button">X</button>
             </div>
