@@ -1,8 +1,11 @@
 <script>
+import { store } from '../store';
+
 export default {
     name: 'NavHeader',
     data() {
         return {
+            store,
             showAccount: false,
             showMenuIcon: false,
             showInput: false,
@@ -90,6 +93,17 @@ export default {
         //     this.showCanvas = false;
         //     this.showCartIcon = false;
         // },
+
+        quantityCard() {
+            let quantity = 0;
+            this.store.cart.forEach(dishe => {
+                quantity += dishe.count;
+            });
+            if (quantity > 99) {
+                return '99+';
+            }
+            return quantity;
+        }
     }
 }
 </script>
@@ -121,9 +135,13 @@ export default {
                                 class="fa-solid fa-magnifying-glass"></i></li>
                         <li @click="showMenu" :class="{ activeButton: showMenuIcon }"><i class="fa-regular fa-user"></i>
                         </li>
-                        <a data-bs-toggle="offcanvas"
-                            href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                            <li><i class="fa-solid fa-cart-shopping"></i></li>
+                        <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                            aria-controls="offcanvasExample">
+                            <li><i class="fa-solid fa-cart-shopping position-relative"></i>
+                                <span v-if="store.cart.length > 0" class="position-absolute translate-middle badge rounded-pill bg-danger">
+                                    {{ quantityCard() }}
+                                </span>
+                            </li>
                         </a>
                     </ul>
                 </div>
@@ -257,6 +275,12 @@ header {
 
                     &:hover {
                         color: #FAA307;
+                    }
+
+                    .badge {
+                        top: 28px;
+                        right: 99px;
+                        font-size: 0.6rem;
                     }
                 }
 
