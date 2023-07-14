@@ -46,30 +46,29 @@ export default {
 
         // ACTIVE REGISTRAZIONE E LOGIN
         showMenu() {
-            if(this.showAccount) {
-            this.hideMenu();
-            this.showMenuIcon = false;
+            if (this.showAccount) {
+                this.hideMenu();
+                this.showMenuIcon = false;
 
             } else {
-            this.showAccount = true;
-            this.showMenuIcon = !this.showMenuIcon;
+                this.showAccount = true;
+                this.showMenuIcon = !this.showMenuIcon;
             }
         },
         hideMenu() {
             this.showAccount = false;
             this.showMenuIcon = false;
         },
-        
-        
+
+
         // ACTIVE SEARCH
         showSearch() {
-            if(this.showInput) {
-            this.hideSearch();
-            this.showSearchIcon = false;
-
+            if (this.showInput) {
+                this.hideSearch();
+                this.showSearchIcon = false;
             } else {
-            this.showInput = true;
-            this.showSearchIcon = !this.showSearchIcon;
+                this.showInput = true;
+                this.showSearchIcon = !this.showSearchIcon;
             }
         },
         hideSearch() {
@@ -78,16 +77,19 @@ export default {
         },
 
         // ACTIVE CART
-        showCart() {
-            this.showCanvas = true;
-            this.showCartIcon = !this.showCartIcon;
-        },
-        hideCart() {
-            this.showCanvas = false;
-            this.showCartIcon = false;
-        },
-
-        
+        // showCart() {
+        //     if (this.showCanvas) {
+        //         this.hideCart();
+        //         this.showCanvasIcon = false;
+        //     } else {
+        //         this.showCanvas = true;
+        //         this.showCartIcon = !this.showCartIcon;
+        //     }
+        // },
+        // hideCart() {
+        //     this.showCanvas = false;
+        //     this.showCartIcon = false;
+        // },
     }
 }
 </script>
@@ -115,9 +117,14 @@ export default {
                         </li>
                     </ul>
                     <ul class="icon p-0 m-0">
-                        <li @click="showSearch" :class="{ activeButton: showSearchIcon }"><i class="fa-solid fa-magnifying-glass"></i></li>
-                        <li @click="showMenu" :class="{ activeButton: showMenuIcon }"><i class="fa-regular fa-user"></i></li>
-                        <li @click="showCart" :class="{ activeButton: showCartIcon }"><i class="fa-solid fa-cart-shopping"></i></li>
+                        <li @click="showSearch" :class="{ activeButton: showSearchIcon }"><i
+                                class="fa-solid fa-magnifying-glass"></i></li>
+                        <li @click="showMenu" :class="{ activeButton: showMenuIcon }"><i class="fa-regular fa-user"></i>
+                        </li>
+                        <a data-bs-toggle="offcanvas"
+                            href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+                            <li><i class="fa-solid fa-cart-shopping"></i></li>
+                        </a>
                     </ul>
                 </div>
             </div>
@@ -231,7 +238,7 @@ header {
                 display: flex;
                 align-items: center;
                 justify-content: end;
-                gap: 15px;
+                // gap: 15px;
                 width: 200px;
                 color: #03071E;
 
@@ -239,8 +246,14 @@ header {
                     display: none;
                 }
 
+                a {
+                    color: #03071E;
+                }
+
                 li {
                     cursor: pointer;
+                    padding: 0 10px;
+
 
                     &:hover {
                         color: #FAA307;
@@ -252,6 +265,10 @@ header {
                     color: #03071E;
                     border-radius: 50%;
                     padding: 5px 10px;
+
+                    li {
+                        padding: 0;
+                    }
 
                     &:hover {
                         color: #03071E;
@@ -343,7 +360,7 @@ header {
                     box-shadow: none;
                 }
 
-                
+
                 span {
                     padding: 9px 15px;
                     position: absolute;
@@ -353,6 +370,7 @@ header {
                     background-color: #F2C802;
                     color: #03071E;
                 }
+
                 .close-search {
                     background-color: #F2C802;
                     border-radius: 10px;

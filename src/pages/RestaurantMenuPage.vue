@@ -115,7 +115,7 @@ export default {
         toggleDescription(dishe) {
             if (!dishe.showFullDescription) {
                 dishe.originalDescription = dishe.description;
-                dishe.description = dishe.description + dishe.hiddenDescription;
+                dishe.description = dishe.description + (dishe.hiddenDescription || '');
             } else {
                 dishe.description = dishe.originalDescription;
             }
@@ -127,24 +127,25 @@ export default {
 </script>
 
 <template>
-    <div class="container">
+    <div class="container mb-5">
         <div v-for="restaurant in restaurants" :key="restaurant.id">
-            <h3 id="ristorante" v-if="restaurant.id === selectedRestaurantId">Menu: {{ restaurant.name }}</h3>
+            <h1 class="text-center mb-4" id="ristorante" v-if="restaurant.id === selectedRestaurantId">Menu: {{
+                restaurant.name }}</h1>
             <div class="bg-warning" v-if="!isSameRestaurantInCart(restaurant.id) && restaurant.id === selectedRestaurantId">
                 <div class="text-center p-3 my-4">
-                    <p>Hai gia dei prodotti nel carrello, non puoi ordinare da più ristoranti.</p>
+                    <p class="m-0">Hai gia dei prodotti nel carrello, non puoi ordinare da più ristoranti.</p>
                 </div>
             </div>
-            <div class="row row-cols-4 flex-wrap" v-if="restaurant.id === selectedRestaurantId">
+            <div class="row row-cols-4" v-if="restaurant.id === selectedRestaurantId">
                 <div v-for="dishe in restaurant.dishes" :key="dishe.id">
                     <div class="col" v-if="dishe.visibility == 1">
-                        <div class="card h-100 w-100">
-                            <figure class="m-0 d-flex justify-content-center">
+                        <div class="card h-100 shadow">
+                            <figure class="m-0">
                                 <img :src="state.imagePath(dishe.image)" class="card-image-top" alt="...">
                             </figure>
-                            <div class="card-body">
-                                <h4>{{ dishe.name }}</h4>
-                                <p>
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold text-start">{{ dishe.name }}</h5>
+                                <p class="m-0 text-start descrizione">
                                     <span v-if="!dishe.showFullDescription">
                                         {{ shortDescription(dishe.description, 100) }}
                                         <a href="#" @click="toggleDescription(dishe)">Mostra di più</a>
@@ -154,12 +155,11 @@ export default {
                                         <a href="#" @click="toggleDescription(dishe)">Mostra meno</a>
                                     </span>
                                 </p>
-                                <!-- <p v-show="dishe.showFullDescription">{{ dishe.description }}</p> -->
 
-                                <p>{{ dishe.price }} €</p>
-                                <button @click="addToCart(dishe)" class="btn btn-primary my-3"
-                                    :disabled="!isSameRestaurantInCart(dishe.selectedRestaurantId)">Aggiungi al
-                                    carrello</button>
+                                <p class="my-2 text-start"><span class="fw-bold">Prezzo: </span>{{ dishe.price }} €</p>
+                                <button @click="addToCart(dishe)" class="btn fw-bold my-2"
+                                    :disabled="!isSameRestaurantInCart(dishe.selectedRestaurantId)">Aggiungi al carrello
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -176,11 +176,11 @@ export default {
                         <h4>{{ item.name }}</h4>
                         <p>€ {{ item.price }}</p>
                         <div>
-                            <button @click="removeFromCart(item)" class="btn btn-primary">
+                            <button @click="removeFromCart(item)" class="btn">
                                 -
                             </button>
                             <span class="mx-2">{{ item.count }}</span>
-                            <button @click="addToCart(item)" class="btn btn-primary">
+                            <button @click="addToCart(item)" class="btn">
                                 +
                             </button>
                         </div>
@@ -188,8 +188,8 @@ export default {
                 </div>
             </div>
             <div>
-                <button @click="clearCart" class="btn btn-primary my-2">Svuota</button>
-                <router-link to="/payment" class="btn btn-primary"> Procedi al pagamento </router-link>
+                <button @click="clearCart" class="btn my-2">Svuota</button>
+                <router-link to="/payment" class="btn"> Procedi al pagamento </router-link>
             </div>
         </div>
     </div>
@@ -204,6 +204,37 @@ export default {
     color: #03071E;
     font-weight: bold;
 
+}
+
+.descrizione::-webkit-scrollbar {
+    background-color: transparent;
+    border-radius: 10px;
+    width: 8px;
+}
+
+.descrizione::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.descrizione::-webkit-scrollbar-thumb {
+    background-color: #F2C802;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #FAA307;
+    }
+}
+
+.descrizione {
+    overflow-y: scroll;
+    height: 100px;
+}
+
+.card {
+    // max-height: calc(96vh - 40%);
+    // max-height: 400px;
+
     figure {
         width: 100%;
         height: 200px;
@@ -214,6 +245,22 @@ export default {
             object-fit: cover;
         }
     }
+}
+
+
+.btn {
+    padding: 5px 10px;
+    background-color: #F2C802;
+    border: 1px solid #FAA307;
+    border-radius: 10px;
+    color: #03071E;
+
+    &:hover {
+        background-color: #FAA307;
+        transform: scale(1.1);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+    }
+
 }
 
 .cart-container {
