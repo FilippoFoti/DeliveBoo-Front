@@ -192,6 +192,10 @@ export default {
 .my_checkbox {
     margin: auto;
 
+    label:hover {
+        color: #fd7e14;
+    }
+
     input[type="checkbox"] {
         display: none;
     }
@@ -201,7 +205,6 @@ export default {
         position: relative;
         padding-left: 35px;
         margin-bottom: 20px;
-        color: #03071E;
         cursor: pointer;
     }
 
