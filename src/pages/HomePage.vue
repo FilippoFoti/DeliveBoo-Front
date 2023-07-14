@@ -62,7 +62,7 @@ export default {
             <div v-if="$route.query.payment_success === 'true'" class="alert alert-warning">
                 <p class="text-center text-black my-4">Pagamento avvenuto con successo, <br>
                     il tuo ordine sta arrivando!</p>
-                <button @click="closePaymentSuccess" class="btn btn-primary close-button">X</button>
+                <button @click="closePaymentSuccess" class="btn btn-warning close-button">X</button>
             </div>
             <p class="m-0 text-shadow">Il servizio di consegna di cibo n. 1 al mondo</p>
             <h1 class="pb-4 text-shadow">Consegnamo il tuo cibo preferito fresco e veloce</h1>
