@@ -12,6 +12,7 @@ export default {
             selectedRestaurantId: null,
         }
     },
+
     mounted() {
         this.getRestaurants(),
             this.selectedRestaurantId = parseInt(this.$route.params.id);
@@ -45,19 +46,19 @@ export default {
                 const newItem = { ...dishe, count: 1 };
                 this.cart.push(newItem);
             }
+
             if (
                 this.selectedRestaurant &&
                 this.selectedRestaurant.id === dishe.restaurantId
             ) {
-                this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map(
-                    (d) => {
-                        if (d.id === dishe.id) {
-                            return { ...d, count: existingItem ? existingItem.count : 1 };
-                        }
-                        return d;
+                this.selectedRestaurant.dishes = this.selectedRestaurant.dishes.map((d) => {
+                    if (d.id === dishe.id) {
+                        return { ...d, count: existingItem ? existingItem.count : 1 };
                     }
-                );
+                    return d;
+                });
             }
+
             this.saveCartToLocalStorage();
         },
         removeFromCart(dishe) {
@@ -167,7 +168,7 @@ export default {
                 </div>
             </div>
         </div>
-        <div v-if="cart.length > 0" class="cart-container" id="cart">
+        <!-- <div v-if="cart.length > 0" class="cart-container" id="cart">
             <h2>Carrello</h2>
             <div class="p-0">
                 <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
@@ -191,7 +192,7 @@ export default {
                 <button @click="clearCart" class="btn my-2">Svuota</button>
                 <router-link to="/payment" class="btn"> Procedi al pagamento </router-link>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
