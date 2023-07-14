@@ -2,7 +2,13 @@
 import NavHeader from './components/NavHeader.vue';
 import AppFooter from './components/AppFooter.vue';
 import Cart from './components/Cart.vue';
+import { store } from './store';
 export default {
+  data () {
+    return {
+      store,
+    }
+  },
   components: { NavHeader, AppFooter, Cart }
 };
 </script>
