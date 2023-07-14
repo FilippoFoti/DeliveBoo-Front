@@ -147,6 +147,10 @@ footer {
                 }
             }
 
+            ul li a:hover {
+                color: white;
+            }
+
             .download {
                 .button {
                     padding: 15px;
