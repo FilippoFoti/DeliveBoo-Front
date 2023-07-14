@@ -95,7 +95,7 @@ export default {
     sendPayment() {
       if (this.hostedFieldsInstance) {
         this.hostedFieldsInstance.tokenize().then(payload => {
-          axios.post('http://127.0.0.1:8000/api/make/payment', {
+          axios.post('http://localhost:8000/api/make/payment', {
             cart: this.cartArray,
             token: payload.nonce,
             customer_name: this.name,
