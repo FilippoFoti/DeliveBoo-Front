@@ -10,11 +10,15 @@ export default {
             restaurants: [],
             selectedType: [],
             selectedRestaurant: null,
+            showPaymentSuccess: false
         }
     },
     mounted() {
         this.getTypes();
         this.getRestaurants();
+        if (this.$route.query.payment_success === 'true') {
+            this.showPaymentSuccess = true;
+        }
     },
     methods: {
         getTypes() {
@@ -44,6 +48,10 @@ export default {
                     console.error(error);
                 });
         },
+        closePaymentSuccess() {
+            this.showPaymentSuccess = false;
+            this.$router.replace({ query: { payment_success: null } });
+        }
     }
 }
 </script>
@@ -51,6 +59,11 @@ export default {
 <template>
     <div id="hero" class="d-flex align-items-center justify-content-center">
         <div class="container text-center">
+            <div v-if="$route.query.payment_success === 'true'" class="alert alert-success">
+                <p class="text-center  my-4">Pagamento avvenuto con successo, <br>
+                    il tuo ordine sta arrivando!</p>
+                <button @click="closePaymentSuccess" class="btn btn-primary close-button">X</button>
+            </div>
             <p class="m-0 text-shadow">Il servizio di consegna di cibo n. 1 al mondo</p>
             <h1 class="pb-4 text-shadow">Consegnamo il tuo cibo preferito fresco e veloce</h1>
             <a href="#click" class="btn">
@@ -172,6 +185,10 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
 
+.conferma {
+    padding-top: 200px;
+}
+
 .my_checkbox {
     margin: auto;
     padding: 50px;
@@ -187,7 +204,7 @@ export default {
         padding-left: 35px;
         margin-bottom: 20px;
         color: #03071E;
-        cursor: pointer;    
+        cursor: pointer;
     }
 
     input[type="checkbox"]+label:last-child {
@@ -414,4 +431,20 @@ export default {
         font-size: 1.1rem;
         color: #03071E;
     }
-}</style>
+}
+
+.alert.alert-success {
+    position: relative;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+</style>

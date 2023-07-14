@@ -76,12 +76,11 @@ export default {
             address: this.address
           }).then(resp => {
             localStorage.clear();
-            this.$router.push('/');
-          })
-        })
-          .catch(err => {
-            console.error(err);
-          })
+            this.$router.push({ path: '/', query: { payment_success: true } });
+          });
+        }).catch(err => {
+          console.error(err);
+        });
       }
     },
     calculateTotal() {
