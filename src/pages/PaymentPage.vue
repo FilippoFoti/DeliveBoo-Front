@@ -35,7 +35,6 @@ export default {
             styles: {
               input: {
                 "font-size": "14px",
-                "font-family": "Open Sans"
               }
             },
             fields: {
@@ -236,6 +235,7 @@ h1 {
     ul {
       color: #03071E;
     }
+
     .unstyled {
       list-style-type: none;
     }
