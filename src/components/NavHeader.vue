@@ -137,8 +137,8 @@ export default {
                         </li>
                         <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                             aria-controls="offcanvasExample">
-                            <li><i class="fa-solid fa-cart-shopping position-relative"></i>
-                                <span v-if="store.cart.length > 0" class="position-absolute translate-middle badge rounded-pill bg-danger">
+                            <li class="position-relative"><i class="fa-solid fa-cart-shopping"></i>
+                                <span v-if="store.cart.length > 0" class="translate-middle badge rounded-pill bg-danger">
                                     {{ quantityCard() }}
                                 </span>
                             </li>
@@ -278,8 +278,9 @@ header {
                     }
 
                     .badge {
-                        top: 28px;
-                        right: 99px;
+                        position: absolute;
+                        top: 0;
+                        right: -35%;
                         font-size: 0.6rem;
                     }
                 }

@@ -84,40 +84,134 @@ export default {
 
 
 <template>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasExampleLabel">carrello</h5>
+    <div class="offcanvas offcanvas-end p-4" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header text-center p-4">
+            <h2 class="offcanvas-title fw-bold text-center" id="offcanvasExampleLabel">Il tuo carrello</h2>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <div class="p-0">
-                <h3>Totale: € {{ cartTotal }}</h3>
+        <div class="offcanvas-body px-4 py-0">
+            <div class="container p-0">
                 <div v-for=" item  in  store.cart " :key="item.id" class="list-unstyled">
-                    <div>
-                        <h4>{{ item.name }}</h4>
-                        <p>€ {{ item.price }}</p>
-                        <div>
-                            <button @click="removeFromCart(item)" class="btn">
+                    <div class="row d-flex">
+                        <div class="col-8">
+                            <h3 class="m-0">{{ item.name }}</h3>
+                            <p class="m-0">Prezzo: <span class="fw-bold">{{ item.price }}€</span></p>
+                        </div>
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            <button @click="removeFromCart(item)" class="btn btn-less fw-bold">
                                 -
                             </button>
-                            <span class="mx-2">{{ item.count }}</span>
-                            <button @click="addToCart(item)" class="btn">
+                            <span class="mx-2 fw-bold">{{ item.count }}</span>
+                            <button @click="addToCart(item)" class="btn btn-add fw-bold">
                                 +
                             </button>
                         </div>
                     </div>
+                    <hr class="my-3">
                 </div>
             </div>
-            <div>
-                <button @click="clearCart" class="btn my-2">Svuota</button>
-                <router-link to="/payment" class="btn"> Procedi al pagamento </router-link>
-            </div>
+        </div>
+        <div class="total-price px-4 py-3 text-end">
+            <h3 class="m-0">Totale: {{ cartTotal }}€</h3>
+        </div>
+        <div class="pay d-flex align-items-center justify-content-center gap-2 p-4 pt-0">
+            <button @click="clearCart" class="btn fw-bold">Svuota</button>
+            <router-link to="/payment" class="btn fw-bold"> Procedi al pagamento </router-link>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+.offcanvas-header {
+    border: 1px dashed #F2C802;
+    border-bottom: 0;
+    border-radius: 5px 5px 0 0;
+
+    .btn-close {
+        background-color: #F2C802;
+        border-radius: 15px;
+
+        &:hover {
+            background-color: #FAA307;
+        }
+    }
+}
+
+.offcanvas-body::-webkit-scrollbar {
+    background-color: transparent;
+    border-radius: 10px;
+    width: 8px;
+}
+
+.offcanvas-body::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+    background-color: #F2C802;
+    border-radius: 10px;
+
+    &:hover {
+        background-color: #FAA307;
+    }
+}
+
+.offcanvas-body {
+    border: 1px dashed #F2C802;
+    border-top: 0;
+    border-bottom: 0;
+    // border-radius: 0 0 5px 5px;
+    overflow-y: scroll;
+
+    h3,
+    p {
+        word-wrap: break-word;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    .btn-less {
+        // padding: 2px 12px 3px;
+        // background-color: #F2C802;
+        // border: 1px solid #FAA307;
+        // border-radius: 10px;
+        // color: #03071E;
+        --bs-btn-font-size: 0.8rem !important;
+        padding: 5px 12px !important;
+    }
+
+    .btn-add {
+        // padding: 2px 10px 3px;
+        // background-color: #F2C802;
+        // border: 1px solid #FAA307;
+        // border-radius: 10px;
+        // color: #03071E;
+        --bs-btn-font-size: 0.8rem !important;
+        padding: 5px 10px !important;
+    }
+
+    hr {
+        border: 1px dashed #F2C802;
+    }
+}
+
+.total-price {
+    border: 1px dashed #F2C802;
+    border-top: 0;
+    border-bottom: 0;
+    // border-radius: 0 0 5px 5px;
+}
+
+.pay {
+    border: 1px dashed #F2C802;
+    border-top: 0;
+    border-radius: 0 0 5px 5px;
+}
 
 .btn {
     padding: 5px 10px;
