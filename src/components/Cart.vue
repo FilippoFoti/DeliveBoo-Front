@@ -91,26 +91,25 @@ export default {
         </div>
         <div class="offcanvas-body">
             <div class="p-0">
-                <h3>Totale: € {{ cartTotal }}</h3>
-                <div v-for=" item  in  store.cart " :key="item.id" class="list-unstyled">
+                <div v-if="store.cart.length === 0">
+                    <p class="message p-1 text-center">Nessun prodotto nel carrello</p>
+                </div>
+                <h3 v-else>Totale: € {{ cartTotal }}</h3>
+                <div v-for="item in store.cart" :key="item.id" class="list-unstyled">
                     <div>
                         <h4>{{ item.name }}</h4>
                         <p>€ {{ item.price }}</p>
                         <div>
-                            <button @click="removeFromCart(item)" class="btn">
-                                -
-                            </button>
+                            <button @click="removeFromCart(item)" class="btn">-</button>
                             <span class="mx-2">{{ item.count }}</span>
-                            <button @click="addToCart(item)" class="btn">
-                                +
-                            </button>
+                            <button @click="addToCart(item)" class="btn">+</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div>
+            <div v-if="store.cart.length > 0">
                 <button @click="clearCart" class="btn my-2">Svuota</button>
-                <router-link to="/payment" class="btn"> Procedi al pagamento </router-link>
+                <router-link to="/payment" class="btn">Procedi al pagamento</router-link>
             </div>
         </div>
     </div>
@@ -118,6 +117,11 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+.message {
+    background-color: #F2C802;
+    border-radius: 5px;
+}
 
 .btn {
     padding: 5px 10px;

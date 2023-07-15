@@ -141,7 +141,7 @@ export default {
             </div>
             <div class="row row-cols-4" v-if="restaurant.id === selectedRestaurantId">
                 <div v-for="dishe in restaurant.dishes" :key="dishe.id">
-                    <div class="card h-100 shadow">
+                    <div class="card h-100 shadow mb-2">
                         <figure class="m-0">
                             <img :src="state.imagePath(dishe.image)" class="card-image-top" alt="...">
                         </figure>
