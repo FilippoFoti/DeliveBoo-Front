@@ -134,43 +134,47 @@ export default {
         <div v-for="restaurant in restaurants" :key="restaurant.id">
             <h1 class="text-center mb-4" id="ristorante" v-if="restaurant.id === selectedRestaurantId">Menu: {{
                 restaurant.name }}</h1>
-            <div class="bg-warning" v-if="!isSameRestaurantInCart(restaurant.id) && restaurant.id === selectedRestaurantId">
+            <div class="messaggio" v-if="!isSameRestaurantInCart(restaurant.id) && restaurant.id === selectedRestaurantId">
                 <div class="text-center p-3 my-4">
                     <p class="m-0">Hai gia dei prodotti nel carrello, non puoi ordinare da più ristoranti.</p>
                 </div>
             </div>
             <div class="row row-cols-4" v-if="restaurant.id === selectedRestaurantId">
                 <div v-for="dishe in restaurant.dishes" :key="dishe.id">
-                    <div class="col" v-if="dishe.visibility == 1">
-                        <div class="card h-100 shadow">
-                            <figure class="m-0">
-                                <img :src="state.imagePath(dishe.image)" class="card-image-top" alt="...">
-                            </figure>
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-bold text-start">{{ dishe.name }}</h5>
-                                <p class="m-0 text-start descrizione">
-                                    <span v-if="!dishe.showFullDescription">
-                                        {{ shortDescription(dishe.description, 100) }}
-                                        <a href="#" @click="toggleDescription(dishe)">Mostra di più</a>
-                                    </span>
-                                    <span v-else>
-                                        {{ dishe.description }}
-                                        <a href="#" @click="toggleDescription(dishe)">Mostra meno</a>
-                                    </span>
-                                </p>
+                    <div class="card h-100 shadow mb-2">
+                        <figure class="m-0">
+                            <img :src="state.imagePath(dishe.image)" class="card-image-top" alt="...">
+                        </figure>
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold text-start">{{ dishe.name }}</h5>
+                            <p class="m-0 text-start descrizione">
+                                <span v-if="!dishe.showFullDescription">
+                                    {{ shortDescription(dishe.description, 100) }}
+                                    <a href="#" @click="toggleDescription(dishe)">Mostra di più</a>
+                                </span>
+                                <span v-else>
+                                    {{ dishe.description }}
+                                    <a href="#" @click="toggleDescription(dishe)">Mostra meno</a>
+                                </span>
+                            </p>
 
-                                <p class="my-2 text-start"><span class="fw-bold">Prezzo: </span>{{ dishe.price }} €</p>
-                                <button @click="addToCart(dishe)" class="btn fw-bold my-2"
-                                    :disabled="!isSameRestaurantInCart(dishe.selectedRestaurantId)">Aggiungi al carrello
-                                </button>
-                            </div>
+                            <p class="my-2 text-start"><span class="fw-bold">Prezzo: </span>{{ dishe.price }} €</p>
+
+                            <button @click="addToCart(dishe)" class="btn fw-bold my-2"
+                                :disabled="!isSameRestaurantInCart(dishe.selectedRestaurantId) || dishe.visibility === 0">
+                                Aggiungi al carrello
+                            </button>
+                            <span v-if="dishe.visibility === 0" class="unavailable-text d-block p-1">
+                                Spiacenti, prodotto non disponibile
+                            </span>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
-        <!-- <div v-if="cart.length > 0" class="cart-container" id="cart">
+    </div>
+    <!-- <div v-if="cart.length > 0" class="cart-container" id="cart">
             <h2>Carrello</h2>
             <div class="p-0">
                 <h3 v-if="cart.length > 0">Totale: € {{ cartTotal }}</h3>
@@ -195,11 +199,19 @@ export default {
                 <router-link to="/payment" class="btn"> Procedi al pagamento </router-link>
             </div>
         </div> -->
-    </div>
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/general.scss" as *;
+
+.unavailable-text {
+    color: red;
+}
+
+.messaggio {
+    border-radius: 5px;
+    background-color: #F2C802;
+}
 
 #ristorante {
     padding-top: 110px;

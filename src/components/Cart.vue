@@ -90,7 +90,10 @@ export default {
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body px-4 py-0">
-            <div class="container p-0">
+            <div v-if="store.cart.length === 0">
+            <p class="message p-1 text-center">Nessun prodotto nel carrello</p>
+        </div>
+            <div v-else class="container p-0">
                 <div v-for=" item  in  store.cart " :key="item.id" class="list-unstyled">
                     <div class="row d-flex">
                         <div class="col-8">
@@ -111,10 +114,10 @@ export default {
                 </div>
             </div>
         </div>
-        <div class="total-price px-4 py-3 text-end">
+        <div  v-if="store.cart.length > 0" class="total-price px-4 py-3 text-end">
             <h3 class="m-0">Totale: {{ cartTotal }}€</h3>
         </div>
-        <div class="pay d-flex align-items-center justify-content-center gap-2 p-4 pt-0">
+        <div v-if="store.cart.length > 0" class="pay d-flex align-items-center justify-content-center gap-2 p-4 pt-0">
             <button @click="clearCart" class="btn fw-bold">Svuota</button>
             <router-link to="/payment" class="btn fw-bold"> Procedi al pagamento </router-link>
         </div>
@@ -211,6 +214,11 @@ export default {
     border: 1px dashed #F2C802;
     border-top: 0;
     border-radius: 0 0 5px 5px;
+}
+
+.message {
+    background-color: #F2C802;
+    border-radius: 5px;
 }
 
 .btn {
