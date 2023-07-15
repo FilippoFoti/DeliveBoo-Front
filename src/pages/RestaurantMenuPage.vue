@@ -134,7 +134,7 @@ export default {
         <div v-for="restaurant in restaurants" :key="restaurant.id">
             <h1 class="text-center mb-4" id="ristorante" v-if="restaurant.id === selectedRestaurantId">Menu: {{
                 restaurant.name }}</h1>
-            <div class="bg-warning" v-if="!isSameRestaurantInCart(restaurant.id) && restaurant.id === selectedRestaurantId">
+            <div class="messaggio" v-if="!isSameRestaurantInCart(restaurant.id) && restaurant.id === selectedRestaurantId">
                 <div class="text-center p-3 my-4">
                     <p class="m-0">Hai gia dei prodotti nel carrello, non puoi ordinare da più ristoranti.</p>
                 </div>
@@ -206,6 +206,11 @@ export default {
 
 .unavailable-text {
     color: red;
+}
+
+.messaggio {
+    border-radius: 5px;
+    background-color: #F2C802;
 }
 
 #ristorante {
