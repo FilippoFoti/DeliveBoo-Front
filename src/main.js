@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { router } from "./router";
+document.title = "Deliveboo";
 import App from './App.vue'
 import 'bootstrap';
 
