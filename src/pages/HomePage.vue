@@ -75,7 +75,7 @@ export default {
     <div id="click"></div>
 
     <div class="container section-1 my-5">
-        <h2 class="text-center m-0">Le nostre tipologie di cucina</h2>
+        <h2 class="text-center m-0">Le nostre cucine</h2>
         <div class="d-flex justify-content-center gap-4 py-5 my_checkbox">
             <div v-for="typeItem in types" :key="typeItem.id">
                 <input type="checkbox" :id="'box-' + typeItem.id" :value="typeItem.id" v-model="selectedType"
