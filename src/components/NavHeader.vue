@@ -94,7 +94,7 @@ export default {
         //     this.showCartIcon = false;
         // },
 
-        quantityCard() {
+        quantityCart() {
             let quantity = 0;
             this.store.cart.forEach(dishe => {
                 quantity += dishe.count;
@@ -139,7 +139,7 @@ export default {
                             aria-controls="offcanvasExample">
                             <li class="position-relative"><i class="fa-solid fa-cart-shopping"></i>
                                 <span v-if="store.cart.length > 0" class="translate-middle badge rounded-pill bg-danger">
-                                    {{ quantityCard() }}
+                                    {{ quantityCart() }}
                                 </span>
                             </li>
                         </a>

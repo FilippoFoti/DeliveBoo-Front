@@ -1,9 +1,11 @@
 <script>
 import axios from "axios";
 import braintree from "braintree-web";
+import { store } from '../store';
 export default {
   data() {
     return {
+      store,
       clientToken: [],
       cartArray: [],
       hostedFieldsInstance: false,
@@ -104,6 +106,7 @@ export default {
             address: this.address
           }).then(resp => {
             localStorage.clear();
+            this.store.cart = [];
             this.$router.push({ path: '/', query: { payment_success: true } });
           });
         }).catch(err => {
