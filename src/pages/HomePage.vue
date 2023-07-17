@@ -76,7 +76,7 @@ export default {
 
     <div class="container section-1 my-5">
         <h2 class="text-center m-0">Le nostre tipologie di cucina</h2>
-        <div class="d-flex justify-content-center gap-4 py-5 my_checkbox">
+        <div class="d-flex justify-content-center gap-4 py-5 my_checkbox flex-wrap">
             <div v-for="typeItem in types" :key="typeItem.id">
                 <input type="checkbox" :id="'box-' + typeItem.id" :value="typeItem.id" v-model="selectedType"
                     @change="getRestaurants" />
@@ -86,7 +86,7 @@ export default {
             </div>
         </div>
 
-        <div class="row row-cols-4 g-5">
+        <div class="row row-cols-sm-2 row-cols-md-3 row row-cols-lg-4 g-5">
             <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
                 <div class="card h-100 shadow">
                     <figure class="m-0">
@@ -150,8 +150,8 @@ export default {
     <!-- <img class="wave-rotate" src="../assets/img/wave-2.svg" alt=""> -->
 
     <div class="container section-3 my-5">
-        <div class="row py-3">
-            <div class="col d-flex align-items-center flex-column justify-content-start">
+        <div class="row py-3 d-flex align-items-top">
+            <div class="col d-flex align-items-center flex-column">
                 <div class="circle d-flex align-items-center justify-content-center shadow">
                     <i class="fa-solid fa-headset"></i>
                 </div>
@@ -160,7 +160,7 @@ export default {
                     telefono!
                 </p>
             </div>
-            <div class="col d-flex align-items-center flex-column justify-content-center">
+            <div class="col d-flex align-items-center flex-column">
                 <div class="circle d-flex align-items-center justify-content-center shadow">
                     <i class="fa-regular fa-credit-card"></i>
                 </div>
@@ -169,7 +169,7 @@ export default {
                     scegliere quella più adatta a te!
                 </p>
             </div>
-            <div class="col d-flex align-items-center flex-column justify-content-center">
+            <div class="col d-flex align-items-center flex-column">
                 <div class="circle d-flex align-items-center justify-content-center shadow">
                     <i class="fa-solid fa-piggy-bank"></i>
                 </div>
@@ -447,5 +447,203 @@ export default {
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+
+// RESPONSIVE LG--------------------------------------------------------------------------------------
+
+@media screen and (max-width: 1199px) {
+    .section-2 {
+        background-color: #DC2F02;
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+        }
+    }
+
+    .alert {
+        margin-top: 100px;
+    }
+}
+
+// RESPONSIVE TABLET---------------------------------------------------------------------
+
+@media screen and (max-width: 991px) {
+    #hero {
+
+        p {
+            font-size: 1.5rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        a {
+            padding: 8px 12px;
+            font-size: 1.1rem;
+        }
+    }
+
+    .my_checkbox input[type=checkbox]+label[data-v-2d1117dc]:before {
+        font-size: 0.8rem;
+    }
+
+    .my_checkbox input[type=checkbox]+label {
+        font-size: 0.8rem;
+    }
+
+    .section-1 {
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        .card {
+            h5 {
+                font-size: 1.3rem;
+            }
+
+            a {
+                padding: 4px 8px;
+            }
+        }
+    }
+
+    .section-2 {
+        h2 {
+            font-size: 1.7rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+
+        .download {
+            .button {
+                padding: 8px;
+                margin: 8px;
+
+                i {
+                    padding-right: 15px;
+                }
+
+                p {
+                    font-size: 0.6rem;
+
+                }
+
+                h4 {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+
+    .section-3 {
+
+        .circle {
+            width: 80px;
+            height: 80px;
+
+            i {
+                font-size: 1.7rem;
+            }
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
+
+    .alert {
+        margin-top: 0;
+    }
+}
+
+// RESPONSIVE CELL---------------------------------------------------------------------
+
+@media screen and (max-width: 767px) {
+    #hero {
+
+        p {
+            font-size: 1.3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        a {
+            padding: 6px 10px;
+            font-size: 0.9rem;
+        }
+    }
+
+    .my_checkbox input[type=checkbox]+label[data-v-2d1117dc]:before {
+        font-size: 0.65rem;
+    }
+
+    .section-1 {
+
+        h2 {
+            font-size: 1.75rem;
+        }
+    }
+
+    .section-2 {
+        h2 {
+            font-size: 1.4rem;
+        }
+
+        p {
+            font-size: 0.75rem;
+        }
+
+        img {
+            width: 66% !important;
+        }
+
+        .download {
+            .button {
+                padding: 6.5px;
+                margin: 6.5px;
+
+                i {
+                    font-size: 1rem;
+                    padding-right: 10px;
+                }
+
+                p {
+                    font-size: 0.5rem;
+
+                }
+
+                h4 {
+                    font-size: 0.75rem;
+                }
+            }
+        }
+    }
+
+    .section-3 {
+
+        .circle {
+            width: 70px;
+            height: 70px;
+
+            i {
+                font-size: 1.4rem;
+            }
+        }
+
+        p {
+            font-size: 0.8rem;
+        }
+    }
 }
 </style>

@@ -67,14 +67,14 @@ export default {
                 <div class="col-3 pt-4">
                     <h2 class="m-0">Download our app</h2>
                     <div class="download">
-                        <div class="button d-flex align-items-center">
+                        <div class="button d-flex align-items-center ms-0 justify-content-center">
                             <i class="fa-brands fa-apple fa-2xl"></i>
                             <div class="text">
                                 <p class="m-0">Download on the</p>
                                 <h4 class="m-0">App Store</h4>
                             </div>
                         </div>
-                        <div class="button d-flex align-items-center">
+                        <div class="button d-flex align-items-center ms-0 justify-content-center">
                             <i class="fa-brands fa-google-play fa-xl"></i>
                             <div class="text">
                                 <p class="m-0">Download on the</p>
@@ -83,14 +83,18 @@ export default {
                         </div>
                     </div>
                 </div>
-                <hr class="my-5">
-                <div class="col-12 mb-4">
-                    <h3 class="m-0">@ All rights reserved. Made by DeliveBoo</h3>
-                    <ul>
-                        <li v-for="list in privacy">
-                            <a href="">{{ list.name }}</a>
-                        </li>
-                    </ul>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <hr class="my-5">
+                    <div class="col-12 mb-4">
+                        <h3 class="m-0">@ All rights reserved. Made by DeliveBoo</h3>
+                        <ul>
+                            <li v-for="list in privacy">
+                                <a href="">{{ list.name }}</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,16 +173,15 @@ footer {
                         color: grey;
                     }
 
-                    h4{
+                    h4 {
                         font-size: 1.2rem;
                         color: white;
                     }
 
                     &:hover {
-                        background-color:#242947;
                         cursor: pointer;
                         transform: scale(1.1);
-                        transition: 1s;
+                        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
                     }
                 }
 
@@ -211,6 +214,142 @@ footer {
                     font-size: 0.8rem;
                     text-decoration: none;
                     color: grey;
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE TABLET--------------------------------------------------------------------
+
+@media screen and (max-width: 991px) {
+    footer {
+        .container {
+            .logo {
+                a {
+                    img {
+                        width: 40px;
+                    }
+
+                    p {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+
+            .col-2,
+            .col-3 {
+                h2 {
+                    font-size: 0.8rem;
+                    padding-bottom: 10px;
+                }
+
+                ul {
+                    a {
+                        font-size: 0.8rem;
+                    }
+                }
+
+                .download {
+                    .button {
+                        padding: 10px;
+                        margin: 10px;
+
+                        i {
+                            padding-right: 10px;
+                        }
+
+                        p {
+                            font-size: 0.7rem;
+                        }
+
+                        h4 {
+                            font-size: 0.8rem;
+                        }
+                    }
+
+                }
+            }
+
+            .col-12 {
+
+                h3 {
+                    font-size: 0.8rem;
+                }
+
+                ul {
+
+
+                    a {
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// RESPONSIVE CELL---------------------------------------------------------------------
+
+@media screen and (max-width: 767px) {
+    footer {
+        .container {
+            .logo {
+                a {
+                    img {
+                        width: 30px;
+                    }
+
+                    p {
+                        font-size: 1.1rem;
+                    }
+                }
+            }
+
+            .col-2,
+            .col-3 {
+                h2 {
+                    font-size: 0.7rem;
+                    padding-bottom: 8px;
+                }
+
+                ul {
+                    a {
+                        font-size: 0.7rem;
+                    }
+                }
+
+                .download {
+                    .button {
+                        padding: 8px;
+                        margin: 10px;
+
+                        i {
+                            padding-right: 6px;
+                            font-size: 1rem;
+                        }
+
+                        p {
+                            font-size: 0.5rem;
+                        }
+
+                        h4 {
+                            font-size: 0.50rem;
+                        }
+                    }
+
+                }
+            }
+
+            .col-12 {
+                h3 {
+                    font-size: 0.6rem;
+                }
+
+                ul {
+                    a {
+                        font-size: 0.55rem;
+                    }
                 }
             }
         }

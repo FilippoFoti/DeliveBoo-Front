@@ -217,19 +217,6 @@ header {
                 justify-content: center;
                 color: #03071E;
 
-                @media screen and (max-width: 992px) {
-                    color: white;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: row;
-                    gap: 10px;
-                    background-color: #03071E;
-                    border: 1px solid #F2C802;
-                    border-radius: 10px;
-                    margin: 5px;
-                }
-
                 a {
                     color: #03071E;
 
@@ -237,12 +224,6 @@ header {
                         color: #FAA307;
                         border-bottom: 2px solid #FAA307;
                         border-radius: 10px;
-                    }
-
-                    @media screen and (max-width: 992px) {
-                        color: white;
-                        border-bottom: none;
-
                     }
                 }
 
@@ -256,13 +237,8 @@ header {
                 display: flex;
                 align-items: center;
                 justify-content: end;
-                // gap: 15px;
                 width: 200px;
                 color: #03071E;
-
-                @media screen and (max-width: 992px) {
-                    display: none;
-                }
 
                 a {
                     color: #03071E;
@@ -409,4 +385,30 @@ header {
         }
     }
 }
+
+// RESPONSIVE
+
+@media screen and (max-width: 991px) {
+    .navbar-collapse {
+        margin-top: 24px;
+        background-color: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        flex-direction: column;
+    }
+    header .navbar .container .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    header .navbar .container .menu a:hover {
+        color: #03071E;
+        border-bottom: none;
+    }
+    header .navbar .container .menu .active {
+        color: #03071E;
+    }
+}
+
 </style>
