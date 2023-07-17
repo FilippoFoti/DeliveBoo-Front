@@ -646,4 +646,10 @@ export default {
         }
     }
 }
+
+@media screen and (max-width: 575px) {
+    .wave-2 {
+        margin-bottom: -1px;
+    }
+}
 </style>

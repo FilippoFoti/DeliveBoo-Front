@@ -121,7 +121,7 @@ export default {
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon">
                         <span v-if="store.cart.length > 0" class="translate-middle badge badge-menu rounded-pill bg-danger">
-                            {{ quantityCard() }}
+                            {{ quantityCart() }}
                         </span>
                     </span>
                 </button>

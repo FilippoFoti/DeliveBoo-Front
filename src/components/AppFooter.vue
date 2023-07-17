@@ -133,8 +133,8 @@ footer {
 
         .col-sm-2,
         .col-md-2,
-        .col-sm-3, 
-        .col-md-3{
+        .col-sm-3,
+        .col-md-3 {
             h2 {
                 font-size: 1.2rem;
                 padding-bottom: 16px;
@@ -348,6 +348,7 @@ footer {
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
+
                 h3 {
                     font-size: 0.6rem;
                 }
@@ -363,6 +364,10 @@ footer {
 }
 
 @media screen and (max-width: 575px) {
+    .wave {
+        margin-bottom: -1px;
+    }
+
     footer {
         .container {
             .col-sm-6 {
@@ -374,5 +379,4 @@ footer {
         }
     }
 }
-
 </style>
