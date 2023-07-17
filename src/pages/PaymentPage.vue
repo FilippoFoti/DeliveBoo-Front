@@ -133,7 +133,7 @@ export default {
   <div class="container">
     <h1 class="text-center mb-4 fw-bold">Pagamento</h1>
     <div class="row">
-      <div class="col-8">
+      <div class="col-lg-8 col-md-12 col-sm-12 order-lg-1 order-md-2 order-sm-2">
         <div class="card p-4 shadow mb-5">
           <form class="p-4">
             <h2 class="fw-bold text-center mb-4">Inserisci i tuoi dati</h2>
@@ -197,7 +197,7 @@ export default {
         </div>
       </div>
 
-      <div class="col-4">
+      <div class="col-lg-4 col-md-12 col-sm-12 order-md-1 order-lg-2 order-md-1 order-sm-1">
         <div class="card p-4 shadow mb-5">
           <div class="card-body p-4">
             <h2 class="text-center fw-bold mb-4">Riepilogo ordine</h2>
@@ -306,6 +306,7 @@ h1 {
 #cvv {
   height: 44px;
 }
+
 .loader {
   margin: 20px auto;
   width: 40px;
@@ -317,7 +318,12 @@ h1 {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
