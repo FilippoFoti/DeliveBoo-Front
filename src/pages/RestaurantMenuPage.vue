@@ -148,13 +148,14 @@ export default {
                         <div class="card-body text-center">
                             <h5 class="card-title fw-bold text-start">{{ dishe.name }}</h5>
                             <p class="m-0 text-start descrizione">
-                                <span v-if="!dishe.showFullDescription">
+                                <span v-if="!dishe.showFullDescription && dishe.description.length > 100">
                                     {{ shortDescription(dishe.description, 100) }}
                                     <a href="#" @click="toggleDescription(dishe)">Mostra di più</a>
                                 </span>
                                 <span v-else>
                                     {{ dishe.description }}
-                                    <a href="#" @click="toggleDescription(dishe)">Mostra meno</a>
+                                    <a href="#" @click="toggleDescription(dishe)" v-if="dishe.showFullDescription">Mostra
+                                        meno</a>
                                 </span>
                             </p>
 
