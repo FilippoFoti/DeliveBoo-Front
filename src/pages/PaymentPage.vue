@@ -137,58 +137,56 @@ export default {
         <div class="card p-4 shadow mb-5">
           <form class="p-4">
             <h2 class="fw-bold text-center mb-4">Inserisci i tuoi dati</h2>
-            <div class="container">
-              <div class="row row-cols-2">
-                <div class="col">
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">Nome</label>
-                    <input type="text" class="form-control" v-model="name" :class="{ 'is-invalid': !isNameValid }">
-                    <div v-if="!isNameValid" class="invalid-feedback">Inserisci un nome valido, senza numeri o caratteri
-                      speciali.
-                    </div>
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">E-mail</label>
-                    <input type="email" class="form-control" v-model="email" :class="{ 'is-invalid': !isEmailValid }">
-                    <div v-if="!isEmailValid" class="invalid-feedback">Inserisci un'e-mail valida (example@domain.com).
-                    </div>
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">Indirizzo</label>
-                    <input type="text" class="form-control" v-model="address" :class="{ 'is-invalid': !isAddressValid }">
-                    <div v-if="!isAddressValid" class="invalid-feedback">Inserisci un indirizzo valido.</div>
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">Data di scadenza</label>
-                    <div id="expiration-date" class="form-control"></div>
+
+            <div class="row">
+              <div class="col-md-6 order-sm-1">
+                <div class="mb-2">
+                  <label class="form-label fw-bold">Nome</label>
+                  <input type="text" class="form-control" v-model="name" :class="{ 'is-invalid': !isNameValid }">
+                  <div v-if="!isNameValid" class="invalid-feedback">Inserisci un nome valido, senza numeri o caratteri
+                    speciali.</div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label fw-bold">Cognome</label>
+                  <input type="text" class="form-control" v-model="surname" :class="{ 'is-invalid': !isSurnameValid }">
+                  <div v-if="!isSurnameValid" class="invalid-feedback">Inserisci un nome valido, senza numeri o caratteri
+                    speciali.</div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label fw-bold">E-mail</label>
+                  <input type="email" class="form-control" v-model="email" :class="{ 'is-invalid': !isEmailValid }">
+                  <div v-if="!isEmailValid" class="invalid-feedback">Inserisci un'e-mail valida (example@domain.com).
                   </div>
                 </div>
-                <div class="col">
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">Cognome</label>
-                    <input type="text" class="form-control" v-model="surname" :class="{ 'is-invalid': !isSurnameValid }">
-                    <div v-if="!isSurnameValid" class="invalid-feedback">Inserisci un nome valido, senza numeri o
-                      caratteri
-                      speciali.</div>
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">Telefono cellulare</label>
-                    <input type="text" class="form-control" v-model="phone" :class="{ 'is-invalid': !isPhoneValid }"
-                      maxlength="10">
-                    <div v-if="!isPhoneValid" class="invalid-feedback">Inserisci un numero di telefono valido (10 cifre).
-                    </div>
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">Numero della carta</label>
-                    <div id="credit-card-number" class="form-control"></div>
-                  </div>
-                  <div class="mb-2">
-                    <label class="form-label fw-bold">CVV</label>
-                    <div id="cvv" class="form-control mb-3"></div>
+                <div class="mb-2">
+                  <label class="form-label fw-bold">Telefono cellulare</label>
+                  <input type="text" class="form-control" v-model="phone" :class="{ 'is-invalid': !isPhoneValid }"
+                    maxlength="10">
+                  <div v-if="!isPhoneValid" class="invalid-feedback">Inserisci un numero di telefono valido (10 cifre).
                   </div>
                 </div>
               </div>
+              <div class="col-md-6 order-sm-2">
+                <div class="mb-2">
+                  <label class="form-label fw-bold">Indirizzo</label>
+                  <input type="text" class="form-control" v-model="address" :class="{ 'is-invalid': !isAddressValid }">
+                  <div v-if="!isAddressValid" class="invalid-feedback">Inserisci un indirizzo valido.</div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label fw-bold">Numero della carta</label>
+                  <div id="credit-card-number" class="form-control"></div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label fw-bold">Data di scadenza</label>
+                  <div id="expiration-date" class="form-control"></div>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label fw-bold">CVV</label>
+                  <div id="cvv" class="form-control mb-3"></div>
+                </div>
+              </div>
             </div>
+
             <div class="text-center mt-3">
               <button type="submit" class="btn fw-bold" @click.prevent="submitForm()" v-if="!loading">Paga Ora</button>
               <div class="loader" v-else></div>
@@ -206,8 +204,7 @@ export default {
               <li class="unstyled">Quantità: <span class="fw-bold">x {{ item.count }}</span></li>
               <li class="unstyled">Prezzo: <span class="fw-bold">{{ item.count * item.price }}€</span></li>
             </ul>
-            <h3 class="text-end mt-5">Prezzo totale: <span class="fw-bold tot">{{ calculateTotal() }}€</span>
-            </h3>
+            <h3 class="text-end mt-5">Prezzo totale: <span class="fw-bold tot">{{ calculateTotal() }}€</span></h3>
           </div>
         </div>
       </div>
@@ -324,6 +321,16 @@ h1 {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .order-md-2 {
+    order: 2;
+  }
+
+  .order-md-1 {
+    order: 1;
   }
 }
 </style>
