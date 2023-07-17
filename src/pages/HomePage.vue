@@ -86,7 +86,7 @@ export default {
             </div>
         </div>
 
-        <div class="row row-cols-sm-2 row-cols-md-3 row row-cols-lg-4 g-5">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-5">
             <div class="col" v-for="restaurant in restaurants" :key="restaurant.id">
                 <div class="card h-100 shadow">
                     <figure class="m-0">
