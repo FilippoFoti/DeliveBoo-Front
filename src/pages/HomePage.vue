@@ -65,7 +65,7 @@ export default {
                 <button @click="closePaymentSuccess" class="btn btn-warning close-button">X</button>
             </div>
             <p class="m-0 text-shadow">Il servizio di consegna di cibo n. 1 al mondo</p>
-            <h1 class="pb-4 text-shadow">Consegnamo il tuo cibo preferito fresco e veloce</h1>
+            <h1 class="pb-4 text-shadow">Consegniamo il tuo cibo preferito fresco e veloce</h1>
             <a href="#click" class="btn">
                 Cosa vuoi mangiare?
             </a>
