@@ -202,7 +202,7 @@ export default {
             <ul v-for="item in cartArray" :key="item.id">
               <li>{{ item.name }}</li>
               <li class="unstyled">Quantità: <span class="fw-bold">x {{ item.count }}</span></li>
-              <li class="unstyled">Prezzo: <span class="fw-bold">{{ item.count * item.price }}€</span></li>
+              <li class="unstyled">Prezzo: <span class="fw-bold">{{ (item.count * item.price).toFixed(2) }}€</span></li>
             </ul>
             <h3 class="text-end mt-5">Prezzo totale: <span class="fw-bold tot">{{ calculateTotal() }}€</span></h3>
           </div>
