@@ -139,8 +139,8 @@ export default {
                     <p class="m-0">Hai gia dei prodotti nel carrello, non puoi ordinare da più ristoranti.</p>
                 </div>
             </div>
-            <div class="row row-cols-4" v-if="restaurant.id === selectedRestaurantId">
-                <div v-for="dishe in restaurant.dishes" :key="dishe.id">
+            <div class="row row-cols-sm-2 row-cols-md-3 row row-cols-lg-4" v-if="restaurant.id === selectedRestaurantId">
+                <div class="col mb-4" v-for="dishe in restaurant.dishes" :key="dishe.id">
                     <div class="card h-100 shadow mb-2">
                         <figure class="m-0">
                             <img :src="state.imagePath(dishe.image)" class="card-image-top" alt="...">
@@ -248,8 +248,6 @@ export default {
 }
 
 .card {
-    // max-height: calc(96vh - 40%);
-    // max-height: 400px;
 
     figure {
         width: 100%;
@@ -259,6 +257,7 @@ export default {
             height: 100%;
             width: 100%;
             object-fit: cover;
+            border-radius: 10px;
         }
     }
 }
@@ -294,4 +293,39 @@ export default {
         margin-top: 80px;
     }
 }
+
+// RESPONSIVE LG---------------------------------------------------------------------------------
+
+@media screen and (max-width: 1199px) {
+    .card {
+
+        figure {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            img {
+                height: 80%;
+                width: 100%;
+            }
+        }
+
+        h5 {
+            font-size: 1rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+    }
+
+    .btn {
+        padding: 4px 8px;
+    }
+}
+
+// RESPONSIVE TABLET---------------------------------------------------------------------------------
+
+
+// RESPONSIVE CELL ---------------------------------------------------------------------------------
 </style>
