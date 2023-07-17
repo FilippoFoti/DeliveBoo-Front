@@ -19,6 +19,7 @@ export default {
       isEmailValid: true,
       isPhoneValid: true,
       isAddressValid: true,
+      loading: false,
     };
   },
 
@@ -67,7 +68,10 @@ export default {
       this.validateForm;
 
       if (this.validateForm()) {
-        this.sendPayment();
+        this.loading = true;
+        this.sendPayment().then(() => {
+          this.loading = false;
+        });
       }
     },
 
@@ -186,7 +190,8 @@ export default {
               </div>
             </div>
             <div class="text-center mt-3">
-              <button type="submit" class="btn fw-bold" @click.prevent="submitForm()">Paga Ora</button>
+              <button type="submit" class="btn fw-bold" @click.prevent="submitForm()" v-if="!loading">Paga Ora</button>
+              <div class="loader" v-else></div>
             </div>
           </form>
         </div>
@@ -300,5 +305,19 @@ h1 {
 #expiration-date,
 #cvv {
   height: 44px;
+}
+.loader {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #FAA307;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
