@@ -33,14 +33,14 @@ export default {
     <img class="wave" src="../assets/img/wave.svg" alt="">
     <footer class="px-4 pb-4">
         <div class="container">
-            <div class="row">
-                <div class="col-3 logo pt-4">
+            <div class="row d-flex">
+                <div class="col-sm-12 col-md-3 text-sm-center logo pt-4">
                     <router-link to="/">
                         <img src="https://cdn.pixabay.com/photo/2013/07/13/10/07/rubber-156597_1280.png" alt="Logo">
                         <p class="m-0 ps-2">DeliveBoo</p>
                     </router-link>
                 </div>
-                <div class="col-2 pt-4">
+                <div class="col-sm-6 col-md-2 text-sm-center pt-4">
                     <h2 class="m-0">Join us</h2>
                     <ul>
                         <li v-for="list in joinUs">
@@ -48,7 +48,7 @@ export default {
                         </li>
                     </ul>
                 </div>
-                <div class="col-2 pt-4">
+                <div class="col-sm-6 col-md-2 text-sm-center pt-4">
                     <h2 class="m-0">Let us help you</h2>
                     <ul>
                         <li v-for="list in letUs">
@@ -56,7 +56,7 @@ export default {
                         </li>
                     </ul>
                 </div>
-                <div class="col-2 pt-4">
+                <div class="col-sm-6 col-md-2 text-sm-center pt-4">
                     <h2 class="m-0">Follow us</h2>
                     <ul>
                         <li v-for="list in followUs">
@@ -64,7 +64,7 @@ export default {
                         </li>
                     </ul>
                 </div>
-                <div class="col-3 pt-4">
+                <div class="col-sm-6 col-md-3 text-sm-center pt-4">
                     <h2 class="m-0">Download our app</h2>
                     <div class="download">
                         <div class="button d-flex align-items-center ms-0 justify-content-center">
@@ -131,8 +131,10 @@ footer {
             }
         }
 
-        .col-2,
-        .col-3 {
+        .col-sm-2,
+        .col-md-2,
+        .col-sm-3, 
+        .col-md-3{
             h2 {
                 font-size: 1.2rem;
                 padding-bottom: 16px;
@@ -342,6 +344,10 @@ footer {
             }
 
             .col-12 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
                 h3 {
                     font-size: 0.6rem;
                 }
@@ -355,4 +361,18 @@ footer {
         }
     }
 }
+
+@media screen and (max-width: 575px) {
+    footer {
+        .container {
+            .col-sm-6 {
+                // display: flex;
+                // align-items: center;
+                // justify-content: center;
+                text-align: center;
+            }
+        }
+    }
+}
+
 </style>
