@@ -116,10 +116,14 @@ export default {
                     <img src="https://cdn.pixabay.com/photo/2013/07/13/10/07/rubber-156597_1280.png" alt="Logo">
                     <p class="m-0 ps-2">DeliveBoo</p>
                 </router-link>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler position-relative" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon">
+                        <span v-if="store.cart.length > 0" class="translate-middle badge badge-menu rounded-pill bg-danger">
+                            {{ quantityCard() }}
+                        </span>
+                    </span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="menu navbar-nav m-auto mb-2 mb-lg-0">
@@ -191,6 +195,12 @@ header {
     .navbar {
         background-color: white !important;
         height: 80px;
+
+        .badge-menu {
+            position: absolute;
+            top: 0;
+            right: -30px;
+        }
 
         .container {
 
@@ -397,18 +407,20 @@ header {
         justify-content: end;
         flex-direction: column;
     }
+
     header .navbar .container .icon {
         display: flex;
         align-items: center;
         justify-content: center;
     }
+
     header .navbar .container .menu a:hover {
         color: #03071E;
         border-bottom: none;
     }
+
     header .navbar .container .menu .active {
         color: #03071E;
     }
 }
-
 </style>
